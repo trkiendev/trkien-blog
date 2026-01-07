@@ -1,4 +1,5 @@
 'use client';
+
 import { CreateUser } from "@/domains/user/user.api";
 import { UserRequestForm, UserRequestPayload } from "@/domains/user/user.type";
 import { Eye, EyeOff, SquareX } from "lucide-react";
@@ -11,8 +12,6 @@ type AddMemberModalProps = {
 };
 
 export default function AddMemberModal({ open, onClose }: AddMemberModalProps) {
-      if (!open) return null;
-
       const [showPassword, setShowPassword] = useState(false);
       const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -25,6 +24,8 @@ export default function AddMemberModal({ open, onClose }: AddMemberModalProps) {
             defaultValues: { roles: [] }
       });
       const password = watch('password');
+
+      if (!open) return null;
 
       const onSubmit = async (data: UserRequestForm) => {
             try {

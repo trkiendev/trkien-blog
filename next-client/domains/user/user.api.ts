@@ -6,4 +6,4 @@ export async function CreateUser(payload: UserRequestPayload) {
             method: 'POST',
             body: JSON.stringify(payload)
       })
-}
+}     
