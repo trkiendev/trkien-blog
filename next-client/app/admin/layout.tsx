@@ -1,6 +1,14 @@
+import { getAuthUser } from "@/lib/auth/get-auth-user";
 import AdminSidebar from "./components/admin-sidebar/admin-sidebar"; 
+import { redirect } from "next/navigation";
 
-export default function AdminLayout({ children }: { children: React.ReactNode }) {
+export default async function AdminLayout({ children }: { children: React.ReactNode }) {
+      const user = await getAuthUser();
+      console.log('user: ', user);
+      if(!user) {
+            redirect('/login');
+      }
+
       return (
             <section className="flex">
                   <aside className="w-64 shrink-0">
