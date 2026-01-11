@@ -34,8 +34,6 @@ export default function AddMemberModal({ open, onClose }: AddMemberModalProps) {
                         password: data.password,
                   };
 
-                  
-
                   await CreateUser(payload);
                   alert('Success');
                   onClose();

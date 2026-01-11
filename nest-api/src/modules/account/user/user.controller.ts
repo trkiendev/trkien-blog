@@ -1,6 +1,6 @@
 import { Body, Controller, Post } from "@nestjs/common";
 import { UserService } from "./user.service";
-import { UserRequestPayload } from "./contracts/user.model";
+import { UserRequestPayload } from "./contracts/user.payload";
 
 @Controller('admin/user')
 export class UserController {
