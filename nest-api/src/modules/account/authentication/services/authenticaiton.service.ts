@@ -16,7 +16,6 @@ export class AuthenticationService {
       ) {}
 
       async login(payload: LoginRequestPayload, res: Response) {
-
             const user = await this.validateUser(payload);
 
             const accessToken = this.jwtService.sign({

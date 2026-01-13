@@ -44,9 +44,8 @@ export default function DomainDrivenDesign() {
                         <div>
                               <h3>WHAT</h3>
                               <p>
-                                    DDD không có 1 pattern cụ thể nào cả mà nó là 1 triết lý xây dựng hệ thống phần mềm xoay quanh nghiệp vụ của doanh nghiệp
-                                    <br></br>
-                                    Nên DDD sẽ phụ thuộc nhiều vào kiến thức xây dựng hệ thống lập trình viên.
+                                    DDD không có 1 pattern cụ thể nào cả mà nó là 1 triết lý xây dựng hệ thống phần mềm xoay quanh nghiệp vụ của doanh nghiệp,
+                                    nên DDD sẽ phụ thuộc nhiều vào kiến thức xây dựng hệ thống lập trình viên.
                               </p>
 
                               <p>
@@ -81,49 +80,59 @@ export default function DomainDrivenDesign() {
                         </div>
 
                         <div>
-                              <span>WHERE</span>
-                              <br />
+                              <h3>WHERE</h3>
                               <p>
                                     Vậy có phải hệ thống ERP nào cũng nên áp dụng DDD ?
                                     Không phải lúc nào cũng áp dụng DDD cho các hệ thống ERP. Để quyết định xem có nên áp dụng DDD hay không thì cần phải biết được ưu và nhược của DDD
                               </p>
                               <br />
-                              <p>
-                                    <span>Điểm mạnh</span>
-                                    <br />
-                                    <span><strong>Code dễ bảo trì</strong>DDD tập trung trừu tượng hóa nghiệp vụ vào 1 class domain entity như ExpensePayment, BugdetPlan
-                                    nên toàn bộ logic nghiệp vụ sẽ tập trung vào 1 class duy nhất thay vì nằm rải rác ở nhiều nơi (Đây là lý thuyết OOP). 
-                                    Qua đó không chỉ giúp tổ chức code gọn gàng mà còn giúp số hóa nghiệp vụ dễ dàng</span>
-                                    <br />
-                                    <span><strong>Ngôn ngữ chung: </strong>Toàn bộ chi tiết, thao tác nghiệp vụ sẽ được diễn giải bên trong class domain nên có thể dễ dàng hình dung nghiệp vụ qua class domain này, nhờ đó mà các lập trình viên join dự án có thể hiểu nghiệp vụ 
-                                    và giao tiếp với các domain expert hay yêu cầu của khách hàng {`giảm rủi ro hiểu sai nghiệp vụ giữa các bên`} dẫn đến kết quả không như ý</span>
-                                    <br />
-                                    <span><strong>Khả năng mở rộng linh hoạt: </strong>Trong các hệ thống áp dụng DDD, 1 nghiệp vụ lớn có thể chia thành nhiều nghiệp vụ nhỏ: bounded context để giảm độ phức tạp (giống với ý tưởng chia để trị: divide & conquere)
-                                    Mỗi context đảm nhận một phần nghiệp vụ riêng biệt, giúp quản lý và phát triển độc lập từng phần mà không ảnh hưởng toàn cụ. Vì vậy mà nếu khi nghiệp vụ có sự thay đổi hoặc cần mở rộng thì , chỉ cần cập nhật phần liên quan mà hệ thống tổng thể ít bị ảnh hưởng. 
-                                    Khả năng này làm cho hệ thống dễ thích ứng với yêu cầu mới và mở rộng quy mô (scalability) hiệu quả hơn</span>
-                                    <br />
-                                    <span><strong>Đáp ứng tốt nghiệp vụ phức tạp: </strong> trong các ứng dụng doanh nghiệp lớn (ERP, tài chính, sản xuất…) có nhiều quy tắc nghiệp vụ phức tạp, DDD cho phép biểu diễn rõ ràng các luật này trên mã nguồn. 
-                                    Mô hình nghiệp vụ được thiết kế tỉ mỉ giúp phần mềm gắn sát mục tiêu kinh doanh nên khi cần thay đổi nghiệp vụ (ví dụ thay đổi quy tắc vượt ngân sách), DDD giúp việc cập nhật mã nguồn trở nên dễ dàng hơn nhờ tất cả liên quan đều hiểu cùng ngôn ngữ chung
-                                    Điều này nâng cao chất lượng phần mềm và giảm thiểu việc ứng dụng sai yêu cầu nghiệp vụ.</span>
-                              </p>
+                              <div>
+                                    <h4 className="section-title">Điểm mạnh</h4>
+                                    <ul className="bullet-list">
+                                          <li>
+                                                <strong>Code dễ bảo trì: </strong>DDD tập trung trừu tượng hóa nghiệp vụ vào 1 class domain entity như ExpensePayment, BugdetPlan
+                                                nên toàn bộ logic nghiệp vụ sẽ tập trung vào 1 class duy nhất thay vì nằm rải rác ở nhiều nơi (Đây là lý thuyết OOP). 
+                                                Qua đó không chỉ giúp tổ chức code gọn gàng mà còn giúp số hóa nghiệp vụ dễ dàng
+                                          </li>
+                                          <li>
+                                               <strong>Ngôn ngữ chung: </strong>Toàn bộ chi tiết, thao tác nghiệp vụ sẽ được diễn giải bên trong class domain nên có thể dễ dàng hình dung nghiệp vụ qua class domain này, nhờ đó mà các lập trình viên join dự án có thể hiểu nghiệp vụ 
+                                                và giao tiếp với các domain expert hay yêu cầu của khách hàng {`giảm rủi ro hiểu sai nghiệp vụ giữa các bên`} dẫn đến kết quả không như ý
+                                          </li>
+                                          <li>
+                                                <strong>Khả năng mở rộng linh hoạt: </strong>Trong các hệ thống áp dụng DDD, 1 nghiệp vụ lớn có thể chia thành nhiều nghiệp vụ nhỏ: bounded context để giảm độ phức tạp (giống với ý tưởng chia để trị: divide & conquere)
+                                                Mỗi context đảm nhận một phần nghiệp vụ riêng biệt, giúp quản lý và phát triển độc lập từng phần mà không ảnh hưởng toàn cụ. Vì vậy mà nếu khi nghiệp vụ có sự thay đổi hoặc cần mở rộng thì , chỉ cần cập nhật phần liên quan mà hệ thống tổng thể ít bị ảnh hưởng. 
+                                                Khả năng này làm cho hệ thống dễ thích ứng với yêu cầu mới và mở rộng quy mô (scalability) hiệu quả hơn
+                                          </li>
+                                          <li>
+                                                <strong>Đáp ứng tốt nghiệp vụ phức tạp: </strong> trong các ứng dụng doanh nghiệp lớn (ERP, tài chính, sản xuất…) có nhiều quy tắc nghiệp vụ phức tạp, DDD cho phép biểu diễn rõ ràng các luật này trên mã nguồn. 
+                                                Mô hình nghiệp vụ được thiết kế tỉ mỉ giúp phần mềm gắn sát mục tiêu kinh doanh nên khi cần thay đổi nghiệp vụ (ví dụ thay đổi quy tắc vượt ngân sách), DDD giúp việc cập nhật mã nguồn trở nên dễ dàng hơn nhờ tất cả liên quan đều hiểu cùng ngôn ngữ chung
+                                                Điều này nâng cao chất lượng phần mềm và giảm thiểu việc ứng dụng sai yêu cầu nghiệp vụ.
+                                          </li>
+                                    </ul>
+                              </div>
                               <br />
-                              <p>
-                                    <span>Bất cập</span>
-                                    <span><strong>Hiểu rõ nghiệp vụ</strong>DDD đòi hỏi phải có ít nhất một người hiểu rõ nghiệp vụ trong nhóm phát triển để đảm bảo mô hình hoá đúng yêu cầu khách hàng.
-                                    Thường thì đây là công việc chính của 1 BA giao tiếp với khách hàng nhưng đôi khi nếu không có BA thì các developers cũng phải chủ động giao tiếp để nắm rõ được nghiệp vụ</span>
-                                    <br />
-                                    <span><strong>Learning curve cao: </strong>DDD có khá nhiều thuật ngữ chuyên dụng như ubiquitous language, entities, value objects, domain behaviors, ....
-                                    Thế nên giai đoạn đầu của dự án sẽ mất nhiều thời gian để tiếp cận dẫn đến chi phí dự án sẽ cao hơn</span>
-                                    <br />
-                                    <span><strong>Không phù hợp với domain đơn giản hoặc ứng dụng CRUD: </strong>Nếu những dự án CRUD đơn giản không có nhiều nghiệp vụ phức tạp thì DDD sẽ là overhead không cần thiết.
-                                    Ví dụ, một form đăng ký xin việc đơn thuần chỉ cần lưu thông tin mà không có quy tắc phức tạp, thì DDD có thể làm tăng công sức thiết kế mà không đem lại lợi ích rõ rệt.
-                                    Trong trường hợp này, những phương pháp thiết kế truyền thống (MVC, CRUD pattern) có thể hiệu quả và nhanh chóng hơn.</span>
-                                    <br/>
-                                    <span><strong>Kém hiệu quả trong các dự án kỹ thuật chuyên sâu: </strong>Đối với những dự án tập trung nhiều về kỹ thuật (hệ thống nhúng, tối ưu thuật toán, hoặc domain quá mới/vắng chuyên gia), khó xây dựng được ngôn ngữ chung mà tất cả cùng hiểu. 
-                                    Do đó, DDD trong trường hợp này sẽ không mang lại nhiều lợi ích so với chi phí bỏ ra</span>
-                                    <br />
-                              </p>
-                              <br />
+                              <div>
+                                    <h4 className="section-title">Bất cập</h4>
+                                    <ul className="bullet-list">
+                                          <li>
+                                                <strong>Hiểu rõ nghiệp vụ</strong>DDD đòi hỏi phải có ít nhất một người hiểu rõ nghiệp vụ trong nhóm phát triển để đảm bảo mô hình hoá đúng yêu cầu khách hàng.
+                                                Thường thì đây là công việc chính của 1 BA giao tiếp với khách hàng nhưng đôi khi nếu không có BA thì các developers cũng phải chủ động giao tiếp để nắm rõ được nghiệp vụ
+                                          </li>
+                                          <li>
+                                                <strong>Learning curve cao: </strong>DDD có khá nhiều thuật ngữ chuyên dụng như ubiquitous language, entities, value objects, domain behaviors, ....
+                                                Thế nên giai đoạn đầu của dự án sẽ mất nhiều thời gian để tiếp cận dẫn đến chi phí dự án sẽ cao hơn
+                                          </li>
+                                          <li>
+                                                <strong>Không phù hợp với domain đơn giản hoặc ứng dụng CRUD: </strong>Nếu những dự án CRUD đơn giản không có nhiều nghiệp vụ phức tạp thì DDD sẽ là overhead không cần thiết.
+                                                Ví dụ, một form đăng ký xin việc đơn thuần chỉ cần lưu thông tin mà không có quy tắc phức tạp, thì DDD có thể làm tăng công sức thiết kế mà không đem lại lợi ích rõ rệt.
+                                                Trong trường hợp này, những phương pháp thiết kế truyền thống (MVC, CRUD pattern) có thể hiệu quả và nhanh chóng hơn.
+                                          </li>
+                                          <li>
+                                                <strong>Kém hiệu quả trong các dự án kỹ thuật chuyên sâu: </strong>Đối với những dự án tập trung nhiều về kỹ thuật (hệ thống nhúng, tối ưu thuật toán, hoặc domain quá mới/vắng chuyên gia), khó xây dựng được ngôn ngữ chung mà tất cả cùng hiểu. 
+                                                Do đó, DDD trong trường hợp này sẽ không mang lại nhiều lợi ích so với chi phí bỏ ra
+                                          </li>
+                                    </ul>
+                              </div>
                               <p>
                                     Tóm lại, DDD phát huy tốt ở các hệ thống doanh nghiệp có nghiệp vụ phức tạp và thay đổi thường xuyên, giúp phần mềm gắn sát với yêu cầu kinh doanh và dễ bảo trì. 
                                     Ngược lại, với các ứng dụng nhỏ, đơn giản hoặc thuần kỹ thuật, DDD có thể gây tốn kém và phức tạp hơn so với lợi ích nhận được. 
@@ -132,7 +141,7 @@ export default function DomainDrivenDesign() {
                         </div>
                   
                         <div>
-                              <h2>WHEN</h2>
+                              <h3>WHEN</h3>
                               <p>
                                     Với mình, DDD sẽ phát huy tốt nhất khi áp dụng vào các ứng dụng vào các hệ thống ERP của doanh nghiệp
                                     Mỗi doanh nghiệp sẽ có quy trình nghiệp vụ khác nhau, phức tạp cũng có mà đơn giản cũng có. 
