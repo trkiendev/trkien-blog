@@ -9,12 +9,11 @@ export default async function CodeBlock({
   code,
   language = 'csharp'
 }: CodeBlockProps) {
-  const html = await highlightCode(code, language);
+      const html = await highlightCode(code, language);
 
-  return (
-    <div
-      className="code-block"
-      dangerouslySetInnerHTML={{ __html: html }}
-    />
-  );
+      return (
+      <div className="code-block"
+            dangerouslySetInnerHTML={{ __html: html }}
+      />
+      );
 }

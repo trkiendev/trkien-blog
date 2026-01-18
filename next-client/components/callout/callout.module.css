@@ -4,6 +4,11 @@
       padding: 10px;
       background-image: linear-gradient(to top, #fbf39d, #fcf49d, #fdf69e, #fdf79e, #fef89f, #fef99f, #fff9a0, #fffaa0, #fffaa0, #fffaa0, #fffaa0, #fffaa0);
       box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      transition: all .2s ease-in-out ;
+}
+.callout:hover {
+      
+      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .content {

@@ -4,6 +4,7 @@ import "./globals.css";
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import '@/components/code/code-block.css';
+import { lexend } from "./(public)/font";
 
 config.autoAddCss = false;
 
@@ -16,7 +17,7 @@ export default function RootLayout({ children, }: { children: React.ReactNode; }
 {
       return (
             <html lang="vi">
-                  <body>
+                  <body className={ lexend.className }>
                         {children}
                   </body>
             </html>

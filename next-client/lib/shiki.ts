@@ -8,7 +8,7 @@ export async function highlightCode(
 ): Promise<string> {
       if (!highlighterPromise) {
             highlighterPromise = createHighlighter({
-                  themes: ['github-dark'],
+                  themes: ['night-owl'],
                   langs: ['csharp', 'java', 'ts', 'js']
             });
       }
@@ -17,6 +17,6 @@ export async function highlightCode(
 
       return highlighter.codeToHtml(code, {
             lang,
-            theme: 'github-dark'
+            theme: 'night-owl'
       });
 }

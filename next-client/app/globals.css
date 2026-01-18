@@ -15,7 +15,7 @@
 }
 
 body {
-      font-family: Lexend, Arial, Helvetica, sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
       font-size: 15px;
       line-height: 2;
 }
@@ -27,9 +27,11 @@ header {
 }
 
 h1 { font-size: 3.25rem; line-height: 1.2; font-weight: 700; color: var(--heading-title-color) }
-h2 { font-size: 2.5rem; line-height: 1.2; font-weight: 700; color: var(--heading-title-color); margin: 28px 0px 14px 0px; }
-h3 { font-size: 2rem; line-height: 1.2; font-weight: 700; color: #6800d0;  margin-top: 20px; margin-bottom: 10px; }
-h4 { font-size: 1.5rem; line-height: 1.2; font-weight: 700; color: #2609b1; margin-top: 30px; margin-bottom: 10px; }
+h2 { font-size: 2.5rem; line-height: 1.2; font-weight: 700; color: var(--heading-title-color); margin: 60px 0px 14px 0px; }
+h3 { font-size: 2rem; line-height: 1.2; font-weight: 700; color: #2609b1;  margin-top: 30px; margin-bottom: 10px; }
+h4 { font-size: 1.5rem; line-height: 1.2; font-weight: 700; margin-top: 30px; margin-bottom: 10px; position: relative; position: relative;  padding-left: 20px; color: var(--primary-fg-color); }
+h4::before { content: ""; background: var(--primary-fg-color); border-radius: 2px; width: 9px; height: 18px; position: absolute; top: 50%; left: 0; transform: translateY(-50%); }
+
 
 /* Page */
 .page-section {
@@ -119,10 +121,11 @@ button, .button { font-family: 'Lexend', sans-serif;  padding: 8px; border-radiu
       cursor: pointer;
       font-size: 12px;
       transition: .25s;
+      background-color: gold;
 }
 .tag-item:hover {
-      box-shadow: 0px 5px 25px 0px rgba(144,144,255,.4);
-      color: var(--primary-fg-color);
+      box-shadow: rgb(255, 239, 0) 0px 2px 8px 0px;
+      opacity: 0.8;
 }
 
 /* text */
@@ -164,4 +167,19 @@ button, .button { font-family: 'Lexend', sans-serif;  padding: 8px; border-radiu
       top: 50%;
       left: 0;
       transform: translateY(-50%);
+}
+
+
+/* blockquote */
+blockquote {
+      line-height: 1.6;
+      width: fit-content;
+      background: #f6f8fa;
+      margin: 20px 0px 20px 0px;
+      padding: 4px 10px;
+      border: 1px solid #d1d9e0;
+      border-radius: 5px;
+      box-shadow: 0px 1px 0px 0px #1f23280a;
+      color: #68696a;
+      font-size: 14px;
 }
