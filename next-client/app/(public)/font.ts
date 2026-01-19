@@ -1,4 +1,4 @@
-import { Lexend, Grand_Hotel, Metamorphous, Borel } from "next/font/google";
+import { Lexend, Grand_Hotel, Metamorphous, Borel, Space_Mono } from "next/font/google";
 
 export const lexend = Lexend({
       subsets: ["latin"],
@@ -19,6 +19,12 @@ export const metamorphous = Metamorphous({
 });
 
 export const borel = Borel({
+      subsets: ["latin"],
+      weight: "400",
+      display: "swap",
+});
+
+export const spaceMono = Space_Mono({
       subsets: ["latin"],
       weight: "400",
       display: "swap",
