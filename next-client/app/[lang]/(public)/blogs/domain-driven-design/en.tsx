@@ -33,241 +33,258 @@
                         
                         <div className="mt-[50px]">
                               <p className="paragraph">
-                                    After a long period of developing ERP systems using Domain-Driven Design
-                                    <br></br>
-                                    Mình viết bài viết này để chia sẻ hiểu biết và trải nghiệm của mình sau khi học và áp dụng DDD vào project thực tế, bài viết sẽ tập trung trả lời câu hỏi: what, why, when và các ví dụ cho từng nội dung.
-                                    <br></br>
-                                    Kiến thức và kinh nghiệm của mình cũng chưa nhiều nên có thể sẽ có những sai sót trong bài viết. Mình sẽ rất vui nếu đọc giả có thể chỉ ra và giúp mình hoàn thiện nội dung bài viết hơn.
+                                   Hello everyone, I have been involved in developing an ERP project approaching Domain-Driven-Design (DDD) philosophy.
+                                   I have found this approach very effective for handling complex business domains.
+                                   So today I would like to share my understanding and experience with the methodology.
+
+                                    <br />
+                                    My knowledge and experience are still limited, so there may be some mistakes in my blog, I would be appreciate if you could help me to improve the content.
                               </p>
                         </div>
 
                         <div>
-                              <h2>Hiểu về DDD: Domain Driven Design</h2>
+                              <h2>I. Understanding: Domain Driven Design</h2>
 
                               <div>
                                     <h3>WHAT</h3>
                                     <p className="paragraph">
-                                          DDD (Domain Driven Design) <strong>không phải là một pattern hay một framework cụ thể</strong>, mà là một <strong>triết lý xây dựng hệ thống phần mềm xoay quanh nghiệp vụ của doanh nghiệp</strong>. 
-                                          Vì tập trung vào nghiệp vụ, nên hiệu quả của DDD phụ thuộc rất nhiều vào việc người xây dựng hệ thống <strong>hiểu nghiệp vụ đến đâu</strong>.
+                                          <strong>DDD (Domain Driven Design) </strong> is not a specific pattern or framework, but a philosophy for building software systems around the core business domain.
+                                          The business domain becomes the heart of the system, where domain-specific processes are clearly defined. When organized structure well, the project approaching DDD could be much easier to maintain and upgrade overtime.
+                                          <br />
+                                          The concept of DDD was introduced by Eric Evans in his book “Domain-Driven Design: Tackling Complexity in the Heart of Software.”. 
+                                          If you want to gain deeper understanding, this book is a good reference.
                                     </p>
                                     <p className="paragraph">
-                                          Theo trải nghiệm cá nhân của mình, DDD phát huy giá trị rõ rệt nhất khi được áp dụng vào các <strong>hệ thống ERP</strong> của doanh nghiệp.
-                                          Mỗi doanh nghiệp đều có quy trình nghiệp vụ riêng: có nơi đơn giản, có nơi rất phức tạp. 
-                                          Và trong thực tế làm việc khoảng gần 1.5 năm, mình nhận ra một điều: nghiệp vụ doanh nghiệp gần như không bao giờ đứng yên.
-                                    </p>
-
-                                    <div>
-                                          Nghiệp vụ có thể thay đổi do:
-                                          <ul className="bullet-list">
-                                                <li>điều chỉnh chiến lược kinh doanh</li>
-                                                <li>tối ưu lại quy trình vận hành,</li>
-                                                <li>hoặc thay đổi theo chính sách, quy định của nhà nước.</li>
-                                          </ul>
-                                          Vì vậy, việc hệ thống phải liên tục thay đổi để đáp ứng nghiệp vụ mới là điều tất yếu.
-                                    </div>
-
-                                    <h4>Khi CRUD không còn đủ</h4>
-                                    Trong nhiều hệ thống ERP, đặc biệt ở giai đoạn đầu, hệ thống thường được xây dựng theo hướng <strong>CRUD thuần :</strong> 
-                                    <blockquote>
-                                          người dùng nhập dữ liệu → hệ thống lưu xuống database → hiển thị dữ liệu ra client → chỉnh sửa, xoá, cập nhật.
-                                    </blockquote>                                   
-                                    Cách làm này ban đầu có thể đơn giản, nhanh và chạy rất mượt. 
-                                    Tuy nhiên, khi quy trình nghiệp vụ mở rộng, đặc biệt trong các lĩnh vực như tài chính, sản xuất, quản trị, hệ thống sẽ dần trở nên phức tạp và khó kiểm soát nếu chỉ dựa vào CRUD và các đoạn  
-                                    <span className={`${spaceMono.className} ${blogCss.codeColor}`}> if-else </span> rải rác.
-
-                                    <h4>Ví dụ từ 1 hệ thống ERP thực tế</h4>
-                                    <p>
-                                          Một hệ thống ERP mình từng tham gia triển khai là hệ thống quản lý <strong>các chứng từ thanh toán và tạm ứng</strong> cho quy mô tập đoàn.
+                                          From my personal experience, every organization has its own business processes - some are simple, while others are highly complex, depending on the scale of the organization.
                                           <br />
-                                          Quy trình nghiệp vụ không chỉ đơn giản là: <span className="highlight-blue-fg">tạo form → gửi duyệt → user bấm duyệt là xong</span> .
+                                          During more than a year of experience, I have realized an important thing: business domains are almost never static; they are continuesly evolving.
                                     </p>
                                     <div>
-                                          Thực tế phức tạp hơn rất nhiều:
+                                          Business rules may change due to:
                                           <ul className="bullet-list">
-                                                <li>Mỗi đề nghị thanh toán phải dựa trên kế hoạch ngân sách <strong>đã được duyệt</strong> từ đầu tháng.</li>
-                                                <li>Mỗi kế hoạch ngân sách có <strong>mã ngân sách và tên ngân sách riêng</strong>, và không được trùng mã trong cùng phòng ban.</li>
-                                                <li>Mỗi mã ngân sách lại <strong>tham chiếu đến mã dòng tiền chi</strong>.</li>
-                                                <li>Đề nghị thanh toán được phép <strong>vượt tối đa 5% ngân sách</strong>.</li>
-                                                <li>Sau khi đề nghị được duyệt hoàn toàn, kế toán mới tạo lệnh chi, và việc này có thể diễn ra trễ.</li>
-                                                <li>Một đề nghị thanh toán có thể phát sinh nhiều <strong>khoản tiền chi</strong>.</li>
+                                                <li>"adjustments in business strategy."</li>
+                                                <li>"optimization of operational processes."</li>
+                                                <li>"or changes in government policies and regulations."</li>
                                           </ul>
-                                          Tất cả những ràng buộc trên có thể coi là các quy tắc nghiệp vụ (business rules) của hệ thống.
+                                          Therefore, it is inevitable that ERP systems must continuesly evolve to adapt to new requirements in order to properly support changing business needes.
                                     </div>
 
-                                    <h4>Vấn dề</h4>
-                                    Những quy tắc này không chỉ xuất hiện ở một chỗ, mà lặp lại ở nhiều quy trình khác nhau.
+                                    <h4>When CRUD is no longer enough</h4>
+                                    In many ERP systems - especially in their early stages - applications are often built around a pure CRUD approach:
+                                    <blockquote>
+                                          user enter data → the system persists it to the database → data is displayed to the client → user update or delete it.
+                                    </blockquote>                                   
+                                    This approach is initially simple, fast to implement, and performs well. However, as business processess grow in complexity - particularly in domain such as finance, manufacturing, and enterprise management.
+                                    The system gradually becomes harder to reason about and maintain if it relies solely on CRUD operations and scattered  <span className={`${spaceMono.className} ${blogCss.codeColor}`}> if-else </span> conditions.
+
+                                    <h4>A Real-World ERP Example</h4>
+                                    <p>
+                                          One ERP system I previously worked on was designed to manage payment requests and advanced payments at a corporate group scale.
+                                          <br />
+                                          The business workflow was far from a simple sequence such as: <span className="highlight-blue-fg">create a form → submit for approval → get approved</span> .
+                                    </p>
+                                    <div>
+                                          In reality, the process was significantly more complex: 
+                                          <ul className="bullet-list">
+                                                <li>Each payment request had to be based on a budget plan that was approved at the beginning of the month.</li>
+                                                <li>Each budget plan had its own budget code and name, and budget codes were required to be unique within the same department.</li>
+                                                <li>Each budget code was mapped to a specific cash flow category.</li>
+                                                <li>Payment request was allowed to exceed the approved budget by up to 5%.</li>
+                                                <li>Only after a payment request was fully approved could accountants create a disbursement order, and this step could be delayed.</li>
+                                                <li>A single payment request could result in multiple outgoing payments.</li>
+                                          </ul>
+                                          All of these constraints can be considered business rules of the system.
+                                    </div>
+
+                                    <h4>The Problem</h4>
+                                    These business rules do not exist in a single place; instead, they are repeated accross multiple workflows.
                                     <br />
-                                    Ví dụ
+                                    For example:
                                     <ul className="bullet-list">
-                                          <li>Khi tạo đề nghị thanh toán → không được vượt ngân sách.</li>
-                                          <li>Khi tạo đề nghị tạm ứng → cũng không được vượt ngân sách.</li>
+                                          <li>When create a payment request → The requested amount must not be exceed the budget.</li>
+                                          <li>When creating an advance payment request → the same budget constraint also applies.</li>
                                     </ul>
                                     <p>
-                                          Nếu mỗi lần xử lý nghiệp vụ, hệ thống lại: truy vấn kế hoạch ngân sách từ database, rồi viết các đoạn kiểm tra kiểu như:    
+                                          If, every time a business process is executed, the system queries the budget plan from the database and perform checks like the following:    
                                     </p> 
 
 <CodeBlock language="csharp"
 code={`
-if (expenseRequest.Amount > budgetPlan.Amount)
-{
-      // Logic kiểm tra vượt ngân sách
-}`}/>
+public class BudgetPlan {
+      // Constructor
+      private BudgetPlan() {}
+      public BudgetPlan() ....
 
-                                    <p>thì logic nghiệp vụ sẽ nhanh chóng bị trùng lặp, phân tán và khó bảo trì.</p>
+      // Properties
+      public Money Amount { get; private set; }
+
+      // Domain behaviors
+      internal bool IsExceed(Money amount) {
+            // Logic kiểm tra ngân sách.... 
+      }
+}
+`}/>
+
+                                    <p>When you need to check the remaining available budget of a 
+                                    <span className={`${spaceMono.className} ${blogCss.codeColor}`} > BudgetPlan </span> entity in any command - such as 
+                                    <span className={`${spaceMono.className} ${blogCss.codeColor}`} > CreateExpensePayment </span> or 
+                                    <span className={`${spaceMono.className} ${blogCss.codeColor}`} > CreateAdvancePayment </span> - you simple call:
                                     
+                                    </p>
 
-                                    <h4>Cách tiếp cận theo DDD</h4>
-                                    Trong cách tiếp cận DDD, những đoạn kiểm tra như vậy không chỉ đơn thuần là điều kiện kỹ thuật , mà là <strong>một phần của nghiệp vụ</strong>. 
-                                    Vì thế, thay vì đặt chúng rải rác ở nhiều nơi, ta đưa chúng vào chính đối tượng nghiệp vụ liên quan. 
+<CodeBlock language="csharp"
+code={`
+var isExceed = budgetPlan.isExceed(amount);
+`}/>
+
+                                    <span>Naturally, since the <span className={`${spaceMono.className} ${blogCss.codeColor}`} > BudgetPlan </span> entity represents the company's budget plan, it can expose many other domain behaviors as well.</span>
                                     <br />
-                                    Ví dụ, quy tắc “kiểm tra số tiền có vượt ngân sách hay không” được đặt vào entity 
-                                    <span className={`${spaceMono.className} ${blogCss.codeColor}`} > BudgetPlan </span>                 
+                                    For example: 
+                                    
+<CodeBlock language="csharp"
+code={`
+internal BudgetPlanItem AddDetail(Guid budgetCodeId, Money amount)
+`}/>
 
+                                    or
+
+<CodeBlock language="csharp"
+code={`
+internal void AssignToPeriod(Guid periodId)
+`}/>
+
+
+                                    <p>As you can see, <span className={`${spaceMono.className} ${blogCss.codeColor}`} > BudgetPlan </span> 
+                                    now becomes a true object-oriented class that encapsulated and abstracts all business related to the company's budget planning domain </p>
+                                       
 <CodeBlock language="csharp"
 code={`
 bool IsValid(Money amount)
 `}/>
-                                    Từ đó, mọi nghiệp vụ liên quan đến ngân sách chỉ cần gọi hành vi này của <span className={`${spaceMono.className} ${blogCss.codeColor}`} > BudgetPlan </span>, thay vì tự kiểm tra theo cách riêng.
-
-                                    <br />
-                                    Lúc này, BudgetPlan không còn chỉ là một object chứa dữ liệu, mà trở thành một mô hình nghiệp vụ (domain model) với các ràng buộc rõ ràng. Các đối tượng khác như:
-                                    <ul className="bullet-list">
-                                          <li><span className={`${spaceMono.className} ${blogCss.codeColor}`} > ExpensePayment </span> (đề nghị thanh toán),</li>
-                                          <li><span className={`${spaceMono.className} ${blogCss.codeColor}`} > AdvancePayment </span> (đề nghị tạm ứng),</li>
-                                          <li><span className={`${spaceMono.className} ${blogCss.codeColor}`} > BudgetTransaction </span> (ghi nhận giao dịch),</li>
-                                    </ul>
-                                    khi cần tương tác với ngân sách đều phải thông qua các <strong>hành vi nghiệp vụ đã được định nghĩa sẵn</strong> trong domain.
 
                                     <Callout>
-                                          DDD không tập trung vào database hay CRUD, mà tập trung vào việc hiện thực hoá nghiệp vụ của doanh nghiệp một cách rõ ràng và nhất quán trong mã nguồn.
+                                          DDD does not focus on the database or CRUD operations. Instead, it focused on expressing business rules clearly and consistently within the codebase.
                                     </Callout>
                               </div>
 
                               <div>
                                     <h3>WHERE</h3>
                                     <p>
-                                          Vậy có phải hệ thống ERP nào cũng nên áp dụng DDD ❓
+                                          Does every ERP system need to apply Domain Driven Design ❓
                                           <br />
-                                          Câu trả lời là không phải lúc nào cũng phù hợp. 
-                                          Việc quyết định có áp dụng DDD hay không cần cân nhắc dựa trên đặc thù nghiệp vụ, quy mô hệ thống và năng lực đội ngũ, thay vì xem DDD như một “chuẩn bắt buộc”.
+                                          The answer is not always. 
+                                          Whether DDD should be adopted depends on the nature of the business domain, the scale of system, and the capability of the development team - rather than treating DDD as a mandatory standard.
                                     </p>
                                     <div>
-                                          <h4 className="section-title">Điểm mạnh</h4>
+                                          <h4 className="section-title">Strenght</h4>
                                           <ul className="bullet-list">
                                                 <li>
-                                                      <strong>Code dễ bảo trì</strong>
+                                                      <strong>Maintainable Code</strong>
                                                       <br />
-                                                      Khi toàn bộ quy tắc nghiệp vụ được đặt trong domain entity (<span className={`${spaceMono.className} ${blogCss.codeColor}`} > ExpensePayment </span>, <span className={`${spaceMono.className} ${blogCss.codeColor}`} > BudgetPlan </span>), mỗi quy tắc chỉ tồn tại một nơi duy nhất. 
+                                                      When business rule are encapsulated within domain entity such as (<span className={`${spaceMono.className} ${blogCss.codeColor}`} > ExpensePayment </span> and <span className={`${spaceMono.className} ${blogCss.codeColor}`} > BudgetPlan </span>), each rule exists in a single place. 
                                                       <br />
-                                                      Điều này giúp tránh việc cùng một nghiệp vụ nhưng được kiểm tra theo nhiều cách khác nhau ở controller, service hoặc query handler, dẫn đến khó bảo trì trong các hệ thống ERP lớn.
+                                                     This prevents the same business logic from being implemented differently accross controllers, services or query handlers - an issue that often leads to poor maintainability in large ERP systems.
                                                 </li>
                                                 <li>
-                                                <strong>Ngôn ngữ chung (Ubiquitous Language)</strong>
-                                                <br />
-                                                Toàn bộ chi tiết, thao tác nghiệp vụ sẽ được diễn giải bên trong class domain entity thì source code trở thành tài liệu nghiệp vụ sống, 
-                                                nhờ đó mà các lập trình viên join dự án có thể hiểu nghiệp vụ và giao tiếp với các domain expert hay yêu cầu của khách hàng {`giảm rủi ro hiểu sai nghiệp vụ giữa khách hàng, BA, dev`}.
-                                                <br />
+                                                      <strong>Ubiquitous Language</strong>
+                                                      <br />
+                                                      By expressing business concepts and behaviors directly inside domain entities, the source code itself becomes a ling documentation of the business domai.
+                                                      This allows new developers to understand the business more easily and reduce the risk of miscommunication between the stakeholders such as domain experts, business analysts, and developers.
+                                                      <br />
                                                 </li>
                                                 <li>
-                                                      <strong>Khả năng mở rộng linh hoạt</strong>
+                                                      <strong>Flexible Scalability</strong>
                                                       <br />
-                                                      Trong các hệ thống áp dụng DDD, 1 nghiệp vụ lớn có thể chia thành nhiều nghiệp vụ nhỏ: <span className={blogCss.highlightText}>bounded context</span> để giảm độ phức tạp (giống với ý tưởng chia để trị: divide & conquere).
-                                                      Mỗi context đảm nhận một phần nghiệp vụ riêng biệt, giúp quản lý và phát triển độc lập từng phần mà không ảnh hưởng toàn cụ. 
+                                                      In system that apply DDD, complex domain can be divide into smaller, more manageable <span className={blogCss.highlightText}>bounded context</span> following a divide-and-conquer approach.
                                                       <br />
-                                                      Vì vậy mà nếu khi nghiệp vụ có sự thay đổi hoặc cần mở rộng thì , chỉ cần cập nhật phần liên quan mà hệ thống tổng thể ít bị ảnh hưởng. 
-                                                      Khả năng này làm cho hệ thống dễ thích ứng với yêu cầu mới và mở rộng quy mô (scalability) hiệu quả hơn
+                                                      Each context represents a distinct part of the business domain and can be developed and evolved independently without impacting the entire system.
+                                                      As a result, when business requirements change or new features are introduced, only the relevant context needs to be updated, allowing the system to adapt more effectively and scale overtime.
                                                 </li>
                                                 <li>
-                                                      <strong>Đáp ứng tốt nghiệp vụ phức tạp</strong>
+                                                      <strong>Strong Support for Complex Domains</strong>
                                                       <br />
-                                                      Với các hệ thống doanh nghiệp lớn (ERP, tài chính, sản xuất…) có nhiều quy tắc nghiệp vụ phức tạp, DDD cho phép biểu diễn rõ ràng các luật này trên mã nguồn. 
-                                                      Mô hình nghiệp vụ được thiết kế tỉ mỉ giúp phần mềm gắn sát mục tiêu kinh doanh nên khi cần thay đổi nghiệp vụ (ví dụ thay đổi quy tắc vượt ngân sách), DDD giúp việc cập nhật mã nguồn trở nên dễ dàng hơn nhờ tất cả liên quan đều hiểu cùng ngôn ngữ chung
-                                                      Điều này nâng cao chất lượng phần mềm và giảm thiểu việc ứng dụng sai yêu cầu nghiệp vụ.
+                                                      For large enterprise systems - such as ERP, finance or manufactoring platforms - with complex business rules, DDD enables these rules to be modeled explicity and clearly in code.
+                                                      <br />
+                                                      Because the domain model closely reflects business goals, changes to business policies (for example, adjusting budget overrun rules) can be implemented more easily.
+                                                      The shared language across stakeholders helps improve software quality and reduces the risk of misinterpreting business requirements.
                                                 </li>
                                           </ul>
                                     </div>
                                     <div>
-                                          <h4 className="section-title">Bất cập</h4>
+                                          <h4 className="section-title">Trade-offs and Limitations</h4>
                                           <ul className="bullet-list">
                                                 <li>
-                                                      <strong>Hiểu rõ nghiệp vụ</strong>
+                                                      <strong>Deep Domain Knowledge required</strong>
                                                       <br />
-                                                      DDD đòi hỏi phải có ít nhất một người hiểu rõ nghiệp vụ trong nhóm phát triển để đảm bảo mô hình hoá đúng yêu cầu khách hàng.
+                                                      DDD requires at least one person on the team have a strong understanding of the business domain to ensure the model accurately reflects real-world requirements.
                                                       <br />
-                                                      Thường thì đây là công việc chính của 1 BA giao tiếp với khách hàng nhưng đôi khi nếu không có BA thì các developers cũng phải chủ động giao tiếp để nắm rõ được nghiệp vụ
+                                                      This role is oftern filtered by a business analyst, but in teams without a dedicated BA, developers must proactively engage with stakeholders to acquire sufficient domain knowledge.
                                                 </li>
                                                 <li>
-                                                      <strong>Learning curve cao</strong>
+                                                      <strong>Steep Learning curve</strong>
                                                       <br />
-                                                      DDD có khá nhiều thuật ngữ chuyên dụng như ubiquitous language, entities, value objects, domain behaviors, ....
-                                                      Thế nên giai đoạn đầu của dự án, dev chưa làm qua DDD bao giờ sẽ mất nhiều thời gian để tiếp học đến thời gian sẽ nhiều hơn.
+                                                      DDD introduces many specialized concepts and terms such as ubiquitous language, entities, value objects, and domain behaviors. 
+                                                      As a result, during the early stages of an project, developers who have never worked with DDD before will need to invest significant time in learning, which can slow down initial development.
                                                 </li>
                                                 <li>
-                                                      <strong>Không phù hợp với domain đơn giản hoặc ứng dụng CRUD</strong>
+                                                      <strong>Not suitable for simple domains or CRUD based applicaitons</strong>
                                                       <br />
-                                                      Nếu những dự án CRUD đơn giản không có nhiều nghiệp vụ phức tạp thì DDD sẽ là overhead không cần thiết.
+                                                      For simple CRUD-style projects with minimal business logic, DDD can introduce uncessary overhead.
                                                       <br />
-                                                      Ví dụ, một form đăng ký xin việc đơn thuần chỉ cần lưu thông tin mà không có quy tắc phức tạp, thì DDD có thể làm tăng công sức thiết kế mà không đem lại lợi ích rõ rệt.
+                                                      For example, a basic job application form that only stores data with complex business rules does not benefit much from DDD.
                                                       <br />
-                                                      Trong trường hợp này, những phương pháp thiết kế truyền thống (MVC, CRUD pattern) có thể hiệu quả và nhanh chóng hơn.
+                                                      In such cases, traditional design approaches (such as MVC or the CRUD pattern) are often more efficient and faster to implement.
                                                 </li>
                                                 <li>
-                                                      <strong>Kém hiệu quả trong các dự án kỹ thuật chuyên sâu</strong>
+                                                      <strong>Less effective for highly technical projects</strong>
                                                       <br />
-                                                      Đối với những dự án tập trung nhiều về kỹ thuật (hệ thống nhúng, tối ưu thuật toán, hoặc domain quá mới/vắng chuyên gia), khó xây dựng được ngôn ngữ chung mà tất cả cùng hiểu. 
-                                                      Do đó, DDD trong trường hợp này sẽ không mang lại nhiều lợi ích so với chi phí bỏ ra.
+                                                      In projects that are heavily focused on technical challenges - such as embedded systesm, algorithm optimization, or domains that are very new or lack domain experts - it can be difficult to establish a shared ubiquitous language that everyone understands.
+                                                      <br />
+                                                      In these situations, DDD may not deliver sufficient value relative to its cost and complexity
                                                 </li>
                                           </ul>
                                     </div>
 
                                     <Callout>
-                                          DDD phát huy tốt ở các hệ thống doanh nghiệp có nghiệp vụ phức tạp và thay đổi thường xuyên, giúp phần mềm gắn sát với yêu cầu kinh doanh và dễ bảo trì. 
-                                          Ngược lại, với các ứng dụng nhỏ, đơn giản hoặc thuần kỹ thuật, DDD có thể gây tốn kém và phức tạp hơn so với lợi ích nhận được. 
-                                          Vậy nên, việc có nên áp dụng DDD hay không phụ thuộc vào tính chất và quy mô của từng dự án cụ thể
+                                          DDD is most effective in enterprise systems with complex business domains that change frequently, as it helps keep the software closely aligned with business requirements and easier to maintain over time. 
+                                          In contrast, for small, simple, or purely technical applications, DDD can introduce additional cost and complexity without delivering proportional benefits.
                                     </Callout>
                               </div>
                         
                               <div>
                                     <h3>WHEN</h3>
-                                    <p>Vậy khi nào nên áp dụng DDD</p>
+                                    <p>So, when should Domain-Driven-Design be applied</p>
                                     <br />
 
                                     <div>
-                                          <strong>Nên áp dụng khi </strong>
+                                          <strong>recommend</strong>
                                           <ul className="bullet-list">
-                                                <li>Nghiệp vụ phức tạp, nhiều ràng buộc</li>
-                                                <li>Nghiệp vụ thay đổi thường xuyên</li>
-                                                <li>Hệ thống có vòng đời dài, cần bảo trì và mở rộng</li>
-                                                <li>Đội ngũ sẵn sàng đầu tư thời gian để hiểu nghiệp vụ</li>
+                                                <li>The business domain is complex and involves many constraints</li>
+                                                <li>Business rule change frequently</li>
+                                                <li>System has a long lifecycle and needs to be maintained and extended over time.</li>
+                                                <li>The team is willing to invest time in deeply understanding the business domain.</li>
                                           </ul>
                                     </div>
 
                                     <div>
-                                          <strong>Chưa nên hoặc không nên khi:</strong>
+                                          <strong>not fit:</strong>
                                           <ul className="bullet-list">
-                                                <li>Hệ thống CRUD đơn giản/</li>
-                                                <li>Bài toán thiên về kỹ thuật hơn nghiệp vụ.</li>
-                                                <li>Đội ngũ chưa có đủ nguồn lực để tiếp cận DDD.</li>
+                                                <li>The system is simple CRUD-based application</li>
+                                                <li>The problem is more technical in nature than business-driven.</li>
+                                                <li>The team does not have sufficient resources or experience to adopt DDD.</li>
                                           </ul>
                                     </div>
-
-                                    <Callout>
-                                          DDD không nhất thiết phải áp dụng toàn phần. 
-                                          Một cách tiếp cận hiệu quả là chỉ áp dụng DDD cho core domain, còn các phần supporting vẫn giữ cách làm đơn giản.
-                                    </Callout>
                               </div>
                         </div>
 
                         <div>
-                              <h2>Kết</h2>
-                              <p>DDD không phải là “viên đạn bạc” cho mọi hệ thống, nhưng nó là một công cụ rất mạnh khi được áp dụng đúng bối cảnh.</p>
-                              <p>Trong các hệ thống ERP – nơi nghiệp vụ phức tạp, thay đổi liên tục và gắn chặt với hoạt động kinh doanh – DDD giúp mã nguồn phản ánh đúng tư duy nghiệp vụ, giảm rủi ro sai lệch và tăng khả năng bảo trì về lâu dài.</p>
-                              <p>Ngược lại, với các hệ thống nhỏ, đơn giản hoặc thuần kỹ thuật, DDD có thể trở thành gánh nặng không cần thiết.</p>
-                              <p>Cuối cùng, việc có áp dụng DDD hay không không nên là quyết định theo xu hướng, mà là một quyết định kiến trúc dựa trên bối cảnh thực tế của dự án và đội ngũ.</p>
-                              <br />
+                              <h2>End</h2>
+                              <p>DDD is not "silver bullet" for every system, but it is a very powerful tool when applied with the right understanding and intent.</p>
+                              <p>Ultimately, the decision to adopt DDD should not be driven by trends, but should be an architectural decision based on the real-world context of the project and the capabilities of the team.</p>
                               <p>
-                                    Mình đã giới thiệu tổng quan về DDD - Domain Driven Design. Đây là 1 nội dung dài, phức tạp nên mình sẽ chia thành nhiều bài viết, và đây chỉ mới là bài viết đầu tiên.
-                                    Cám ơn đã đọc bài viết của mình, mình sẽ cập nhật thêm các bài viết mới về chủ đề DDD trong thời gian tới
+                                    This article provides a high-level introduction to Domain-Driven Design (DDD). Since this is a broad and complex topic, I plan to break it down into multiple articles, and this is only the first one.
+                                    <br />
+                                    Thank you for taking the time to read this article. I will continue to share more content about DDD in future posts.
                               </p>
                         </div>
                   </>

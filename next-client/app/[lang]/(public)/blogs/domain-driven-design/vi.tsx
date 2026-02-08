@@ -33,29 +33,28 @@
                         
                         <div className="mt-[50px]">
                               <p className="paragraph">
-                                    Sau 1 khoảng thời gian khá dài phát triển dự án ERP theo cách tiếp cận DDD, bản thân mình đã đọc qua nhiều tải liệu về DDD cũng như cách áp dụng vào dự án thực tế là như thế.
-                                    <br></br>
-                                    Mình viết bài viết này để chia sẻ hiểu biết và trải nghiệm của mình sau khi học và áp dụng DDD vào project thực tế, bài viết sẽ tập trung trả lời câu hỏi: what, why, when và các ví dụ cho từng nội dung.
+                                    Chào các bạn, mình đã tham gia phát triển dự án ERP và triển khai theo triết lý Domain Driven Design - DDD và nhận thấy rằng đây là 1 cách tiếp cận rất hay trong nghiệp vụ phát triển phần mềm nên hôm nay mạo muội chia sẻ những hiểu biết của mình về cách triển khai này.
                                     <br></br>
                                     Kiến thức và kinh nghiệm của mình cũng chưa nhiều nên có thể sẽ có những sai sót trong bài viết. Mình sẽ rất vui nếu đọc giả có thể chỉ ra và giúp mình hoàn thiện nội dung bài viết hơn.
                               </p>
                         </div>
 
                         <div>
-                              <h2>Hiểu về DDD: Domain Driven Design</h2>
+                              <h2>I. Hiểu về DDD: Domain Driven Design</h2>
 
                               <div>
                                     <h3>WHAT</h3>
                                     <p className="paragraph">
                                           DDD (Domain Driven Design) <strong>không phải là một pattern hay một framework cụ thể</strong>, mà là một <strong>triết lý xây dựng hệ thống phần mềm xoay quanh nghiệp vụ của doanh nghiệp</strong>. 
-                                          Vì tập trung vào nghiệp vụ, nên hiệu quả của DDD phụ thuộc rất nhiều vào việc người xây dựng hệ thống <strong>hiểu nghiệp vụ đến đâu</strong>.
+                                          Domain doanh nghiệp sẽ là trái tim của hệ thống, đặc tả các quy trình đặc thù của doanh nghiệp nên nếu được tổ chức tốt, dự án DDD sẽ rất dễ bảo trì và mở rộng về sau.
+                                          <br />
+                                          Khái niệm DDD được tác giả Eric Evans giới thiệu trong sách: 'Domain-Driven Design: Tackling Complexity in the Heart of software' nên nếu các bạn muốn tìm hiểu sâu hơn về DDD thì có thể tham khảo cuốn sách này.
                                     </p>
                                     <p className="paragraph">
-                                          Theo trải nghiệm cá nhân của mình, DDD phát huy giá trị rõ rệt nhất khi được áp dụng vào các <strong>hệ thống ERP</strong> của doanh nghiệp.
-                                          Mỗi doanh nghiệp đều có quy trình nghiệp vụ riêng: có nơi đơn giản, có nơi rất phức tạp. 
-                                          Và trong thực tế làm việc khoảng gần 1.5 năm, mình nhận ra một điều: nghiệp vụ doanh nghiệp gần như không bao giờ đứng yên.
+                                          Theo trải nghiệm cá nhân của mình, mỗi doanh nghiệp đều có quy trình nghiệp vụ riêng: có nơi đơn giản, có nơi rất phức tạp tùy theo quy mô của họ.
+                                          <br />
+                                          Và trong thực tế làm việc khoảng gần 1.5 năm, mình nhận ra một điều: nghiệp vụ doanh nghiệp gần như không bao giờ tĩnh mà luôn vận động thay đổi.
                                     </p>
-
                                     <div>
                                           Nghiệp vụ có thể thay đổi do:
                                           <ul className="bullet-list">
@@ -63,7 +62,7 @@
                                                 <li>tối ưu lại quy trình vận hành,</li>
                                                 <li>hoặc thay đổi theo chính sách, quy định của nhà nước.</li>
                                           </ul>
-                                          Vì vậy, việc hệ thống phải liên tục thay đổi để đáp ứng nghiệp vụ mới là điều tất yếu.
+                                          Vì vậy, việc hệ thống ERP của các doanh nghiệp phải liên tục thay đổi theo requirement để đáp ứng nghiệp vụ mới là điều tất yếu.
                                     </div>
 
                                     <h4>Khi CRUD không còn đủ</h4>
@@ -73,7 +72,8 @@
                                     </blockquote>                                   
                                     Cách làm này ban đầu có thể đơn giản, nhanh và chạy rất mượt. 
                                     Tuy nhiên, khi quy trình nghiệp vụ mở rộng, đặc biệt trong các lĩnh vực như tài chính, sản xuất, quản trị, hệ thống sẽ dần trở nên phức tạp và khó kiểm soát nếu chỉ dựa vào CRUD và các đoạn  
-                                    <span className={`${spaceMono.className} ${blogCss.codeColor}`}> if-else </span> rải rác.
+                                    logic nghiệp vụ rải rác.
+                                    <br />
 
                                     <h4>Ví dụ từ 1 hệ thống ERP thực tế</h4>
                                     <p>
@@ -103,7 +103,8 @@
                                           <li>Khi tạo đề nghị tạm ứng → cũng không được vượt ngân sách.</li>
                                     </ul>
                                     <p>
-                                          Nếu mỗi lần xử lý nghiệp vụ, hệ thống lại: truy vấn kế hoạch ngân sách từ database, rồi viết các đoạn kiểm tra kiểu như:    
+                                          Nếu mỗi lần thiết kế nghiệp vụ, bạn lặp đi lặp lại các đoạn code logic kiểm tra ngân sách này hoặc lại phải mất thời gian đọc lại code, tài liệu để hiểu luồng - quy trình thì sẽ là 1 cơn ác mộng.
+                                          Ví dụ, đoạn code logic kiểm tra ngân sách này
                                     </p> 
 
 <CodeBlock language="csharp"
@@ -113,30 +114,57 @@ if (expenseRequest.Amount > budgetPlan.Amount)
       // Logic kiểm tra vượt ngân sách
 }`}/>
 
-                                    <p>thì logic nghiệp vụ sẽ nhanh chóng bị trùng lặp, phân tán và khó bảo trì.</p>
+                                    <p>không thể lặp lại ở nhiều class rải rác khắp source code.</p>
                                     
 
                                     <h4>Cách tiếp cận theo DDD</h4>
-                                    Trong cách tiếp cận DDD, những đoạn kiểm tra như vậy không chỉ đơn thuần là điều kiện kỹ thuật , mà là <strong>một phần của nghiệp vụ</strong>. 
-                                    Vì thế, thay vì đặt chúng rải rác ở nhiều nơi, ta đưa chúng vào chính đối tượng nghiệp vụ liên quan. 
-                                    <br />
-                                    Ví dụ, quy tắc “kiểm tra số tiền có vượt ngân sách hay không” được đặt vào entity 
-                                    <span className={`${spaceMono.className} ${blogCss.codeColor}`} > BudgetPlan </span>                 
+                                    Với góc nhìn của DDD, các đoạn code logic kiểm tra ngân sách đó sẽ là <strong>1 quy trình nghiệp vụ</strong>. 
+                                    Và chúng ta nên trừu tượng hóa nó thành hành vi (domain behavior) của class entity: BudgetPlan
 
 <CodeBlock language="csharp"
 code={`
-bool IsValid(Money amount)
-`}/>
-                                    Từ đó, mọi nghiệp vụ liên quan đến ngân sách chỉ cần gọi hành vi này của <span className={`${spaceMono.className} ${blogCss.codeColor}`} > BudgetPlan </span>, thay vì tự kiểm tra theo cách riêng.
+public class BudgetPlan {
+      // Constructor
+      private BudgetPlan() {}
+      public BudgetPlan() ....
 
-                                    <br />
-                                    Lúc này, BudgetPlan không còn chỉ là một object chứa dữ liệu, mà trở thành một mô hình nghiệp vụ (domain model) với các ràng buộc rõ ràng. Các đối tượng khác như:
-                                    <ul className="bullet-list">
-                                          <li><span className={`${spaceMono.className} ${blogCss.codeColor}`} > ExpensePayment </span> (đề nghị thanh toán),</li>
-                                          <li><span className={`${spaceMono.className} ${blogCss.codeColor}`} > AdvancePayment </span> (đề nghị tạm ứng),</li>
-                                          <li><span className={`${spaceMono.className} ${blogCss.codeColor}`} > BudgetTransaction </span> (ghi nhận giao dịch),</li>
-                                    </ul>
-                                    khi cần tương tác với ngân sách đều phải thông qua các <strong>hành vi nghiệp vụ đã được định nghĩa sẵn</strong> trong domain.
+      // Properties
+      public Money Amount { get; private set; }
+
+      // Domain behaviors
+      internal bool IsExceed(Money amount) {
+            // Logic kiểm tra ngân sách.... 
+      }
+}
+`}/>
+                                    
+                                    và mỗi lần cần kiểm tra ngân sách còn khả dụng của <span className={`${spaceMono.className} ${blogCss.codeColor}`} > BudgetPlan </span> trong bất kỳ command nào như 
+                                    <span className={`${spaceMono.className} ${blogCss.codeColor}`}> CreateExpensePayment </span>
+                                    hoặc
+                                    <span className={`${spaceMono.className} ${blogCss.codeColor}`}> CreateAdvancePayment </span>
+                                    thì bạn chỉ cần gọi hàm 
+
+<CodeBlock language="csharp"
+code={`
+var isExceed = budgetPlan.isExceed(amount);
+`}/>
+                                    
+                                    và dĩ nhiên enity <span className={`${spaceMono.className} ${blogCss.codeColor}`} > BudgetPlan </span> đại diện cho Ngân sách của công ty còn có thể có nhiều domain behavior khác như 
+
+<CodeBlock language="csharp"
+code={`
+internal BudgetPlanItem AddDetail(Guid budgetCodeId, Money amount)
+`}/>
+
+                                    hoặc
+
+<CodeBlock language="csharp"
+code={`
+internal void AssignToPeriod(Guid periodId)
+`}/>
+
+
+                                    Như các bạn thấy, BudgetPlan lúc này là 1 class OOP - trừu tượng hóa toàn bộ nghiệp vụ liên quan đến Kế hoạch ngân sách của doanh nghiệp
 
                                     <Callout>
                                           DDD không tập trung vào database hay CRUD, mà tập trung vào việc hiện thực hoá nghiệp vụ của doanh nghiệp một cách rõ ràng và nhất quán trong mã nguồn.
@@ -230,7 +258,6 @@ bool IsValid(Money amount)
                               <div>
                                     <h3>WHEN</h3>
                                     <p>Vậy khi nào nên áp dụng DDD</p>
-                                    <br />
 
                                     <div>
                                           <strong>Nên áp dụng khi </strong>
@@ -245,7 +272,7 @@ bool IsValid(Money amount)
                                     <div>
                                           <strong>Chưa nên hoặc không nên khi:</strong>
                                           <ul className="bullet-list">
-                                                <li>Hệ thống CRUD đơn giản/</li>
+                                                <li>Hệ thống CRUD đơn giản</li>
                                                 <li>Bài toán thiên về kỹ thuật hơn nghiệp vụ.</li>
                                                 <li>Đội ngũ chưa có đủ nguồn lực để tiếp cận DDD.</li>
                                           </ul>
@@ -259,8 +286,8 @@ bool IsValid(Money amount)
                         </div>
 
                         <div>
-                              <h2>Kết</h2>
-                              <p>DDD không phải là “viên đạn bạc” cho mọi hệ thống, nhưng nó là một công cụ rất mạnh khi được áp dụng đúng bối cảnh.</p>
+                              <h2>II. Kết</h2>
+                              <p>DDD không phải là “viên đạn bạc” cho mọi hệ thống, nhưng nó là một công cụ rất mạnh khi được áp dụng đúng concept.</p>
                               <p>Trong các hệ thống ERP – nơi nghiệp vụ phức tạp, thay đổi liên tục và gắn chặt với hoạt động kinh doanh – DDD giúp mã nguồn phản ánh đúng tư duy nghiệp vụ, giảm rủi ro sai lệch và tăng khả năng bảo trì về lâu dài.</p>
                               <p>Ngược lại, với các hệ thống nhỏ, đơn giản hoặc thuần kỹ thuật, DDD có thể trở thành gánh nặng không cần thiết.</p>
                               <p>Cuối cùng, việc có áp dụng DDD hay không không nên là quyết định theo xu hướng, mà là một quyết định kiến trúc dựa trên bối cảnh thực tế của dự án và đội ngũ.</p>
