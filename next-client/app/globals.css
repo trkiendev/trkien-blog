@@ -27,7 +27,7 @@ header {
 }
 
 h1 { font-size: 3.25rem; line-height: 1.2; font-weight: 700; color: var(--heading-title-color) }
-h2 { font-size: 2.5rem; line-height: 1.2; font-weight: 700; color: var(--heading-title-color); margin: 60px 0px 14px 0px; }
+h2 { font-size: 2.5rem; line-height: 1.2; font-weight: 700; color: #520097; margin: 60px 0px 14px 0px; }
 h3 { font-size: 2rem; line-height: 1.2; font-weight: 700; color: #2609b1;  margin-top: 30px; margin-bottom: 10px; }
 h4 { font-size: 1.5rem; line-height: 1.2; font-weight: 700; margin-top: 30px; margin-bottom: 10px; position: relative; position: relative;  padding-left: 20px; color: var(--primary-fg-color); }
 h4::before { content: ""; background: var(--primary-fg-color); border-radius: 2px; width: 9px; height: 18px; position: absolute; top: 50%; left: 0; transform: translateY(-50%); }

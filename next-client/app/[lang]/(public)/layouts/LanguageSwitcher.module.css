@@ -1,0 +1,10 @@
+.languageSwitcherSelect {
+      border: 1px solid #d1d9e0;
+      font-size: 13px;
+      padding: 6px;
+      border-radius: 5px;
+      cursor: pointer;
+}
+.languageSwitcherSelect:hover {
+      background: #f6f8fa;
+}
