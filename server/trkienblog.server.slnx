@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="trkienBlog.Api/trkienBlog.Api.csproj" />
+  <Project Path="trkienBlog.Application/trkienBlog.Application.csproj" />
+  <Project Path="trkienBlog.Domain/trkienBlog.Domain.csproj" />
+  <Project Path="trkienBlog.Infrastructure/trkienBlog.Infrastructure.csproj" />
+</Solution>

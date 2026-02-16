@@ -1,0 +1,51 @@
+/* homepageHeading */
+.homepageHeading h1 {
+      font-size: 47px;
+}
+.homepageHeading span {
+      background: linear-gradient(180deg,#9895ff 0%,#514dcc 100%);
+      background-clip: border-box;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+}
+.homepageHeading p {
+      color: var(--secondary-color);
+      font-weight: 399;
+      font-size: 18px;
+}
+
+/* listTopics */
+.homepageTopics h2 {
+      color: var(--secondary-color);
+      text-align: center;
+      font-size: 20px;
+      font-weight: 600;
+}
+.homepageTopics .listTopics {
+      display: flex;
+      justify-content: center;
+}
+.homepageTopics .topicItem {
+      background-color: #fff;
+      display: flex;
+      gap: 10px;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0px 5px 25px 0px rgba(114, 114, 255, .12);
+      transition: .25s;
+      border-radius: 100px;
+      width: fit-content;
+      padding: .75rem 1.25rem .75rem 1.125rem;
+}
+.homepageTopics .topicItem:hover {
+      box-shadow: 0px 5px 25px 0px #5353fb3d;
+      background-color: rgba(255,255,255,.9);
+}
+.homepageTopcis .topicItem .topicItemIcon {
+
+}
+.homepageTopcis .topicItem .topicItemText {
+      font-weight: 600;
+}
+
