@@ -1,26 +1,35 @@
-import { jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import 'server-only';
 
-const secret = new TextEncoder().encode(process.env.JWT_SECRET);
+const API_BASE = process.env.NEXT_PUBLIC_API_URL!;
+if (!API_BASE) {
+      throw new Error('NEXT_PUBLIC_API_URL is not defined');
+}
 
 export async function getAuthUser() {
-      const cookieStore = await cookies();
-      const token = cookieStore.get('access_token')?.value;
-      console.log('token: ', token);
-      if(!token) 
-            return null;
-
       try {
-            const { payload } = await jwtVerify(token, secret);
-            console.log('payload: ', payload);
+            const cookieStore = await cookies();
 
-            return {
-                  id: payload.sub as string,
-                  email: payload.email as string,
-                  role: payload.role as string
-            }
-      } catch {
-            return null
+            const cookieHeader = cookieStore.getAll()
+                  .map(c => `${c.name}=${c.value}`)
+                  .join("; ");
+
+            if (!cookieHeader) return null;
+
+            const res = await fetch(`${API_BASE}/auth/me`, {
+                  method: "GET",
+                  headers: {
+                        Cookie: cookieHeader,
+                  },
+                  cache: "no-store",
+            });
+
+            if (!res.ok) return null;
+
+            const json = await res.json();
+            return json.data ?? null;
+      } catch (err) {
+            console.error("getAuthUser error:", err);
+            return null;
       }
 }

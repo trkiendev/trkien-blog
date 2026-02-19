@@ -46,7 +46,6 @@ h4::before { content: ""; background: var(--primary-fg-color); border-radius: 2p
       padding: 0 24px;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
 }
 
 

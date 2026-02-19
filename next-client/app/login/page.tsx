@@ -20,12 +20,11 @@ export default function LoginPage() {
       const onSubmit = async(data: LoginForm) => {
             try {
                   const payload: LoginPayload = {
-                        email: data.email,
+                        username: data.username,
                         password: data.password
                   };
-
+                  
                   await Login(payload);
-                  alert('Success');
                   router.push('/admin');
             } catch(error) {
                   alert(error instanceof Error ? error.message : 'Login failed');
@@ -37,18 +36,14 @@ export default function LoginPage() {
                   <h1>Login page</h1>
                   <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
                         <div>
-                              <label htmlFor="">Email</label>
-                              <input type="email" className="form-input w-full" 
-                                    {...register('email', {
-                                          required: 'Email is required',
-                                          pattern: {
-                                                value: /^\S+@\S+$/i,
-                                                message: 'Invalid email format'
-                                          }
-                                    })} 
+                              <label htmlFor="form-label">Username</label>
+                              <input type="text" className="form-input w-full" 
+                              {...register('username', {
+                                    required: 'Username is required',
+                              })} 
                               />
-                              {errors.email && (
-                                    <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>
+                              {errors.username && (
+                                    <p className="text-red-500 text-xs mt-1">{errors.username.message}</p>
                               )}
                         </div>
 

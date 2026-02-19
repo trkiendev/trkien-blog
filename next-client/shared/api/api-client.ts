@@ -15,6 +15,7 @@ export async function apiFetch<T>(
             ...options,
       });
 
+
       if(!res.ok) {
             let message = 'Request failed';
             

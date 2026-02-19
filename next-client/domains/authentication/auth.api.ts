@@ -4,7 +4,7 @@ import { LoginPayload } from "./login.model";
 export async function Login(payload: LoginPayload) {
       return apiFetch('/auth/login', {
             method: 'POST',
-            credentials: 'include',
+            credentials: 'include', // receive Set-Cookie
             headers: {
                   'Content-Type': 'application/json',
             },

@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
       const user = await getAuthUser();
-      console.log('user: ', user);
+
       if(!user) {
             redirect('/login');
       }
@@ -15,9 +15,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
                         <AdminSidebar />
                   </aside>
                   <div className="flex-1">
-                        <header className="bg-white shadow-[rgba(0, 0, 0, 0.1)_0px_1px_3px_0px, rgba(0, 0, 0, 0.06)_0px_1px_2px_0px]">
-
-                        </header>
+                        <header className="bg-white shadow-[rgba(0, 0, 0, 0.1)_0px_1px_3px_0px, rgba(0, 0, 0, 0.06)_0px_1px_2px_0px]"></header>
                         <main className="min-h-screen secondary-bg-color p-4">{ children }</main>
                         <footer></footer>
                   </div>
