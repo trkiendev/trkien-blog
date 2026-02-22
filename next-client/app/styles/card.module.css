@@ -1,0 +1,26 @@
+
+
+.primaryCard .cardWrapper  {
+      border-radius: 5px;
+      background-color: white;
+      border: 1px solid #d1d9e0b3;
+      width: 100%;
+      height: fit-content;
+}    
+.primaryCard .cardHeader {
+      font-size: 14px;
+      font-weight: bold;
+      padding: 8px;
+      background-color: #fff;
+}      
+.primaryCard .cardBody {
+      padding: 15px;
+      padding: 20px;
+}
+.primary-card .cardBox {
+      width: 80%;
+      border: 1px solid #696981;
+      border-radius: 5px;
+      padding: 10px;
+      user-select: none;
+}

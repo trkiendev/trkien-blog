@@ -18,7 +18,7 @@ export default async function PublicLayout({ children, params }: Props) {
                         <Header lang={lang} />
 
                         {/* main */}
-                        <main>{children}</main>
+                        <main className="h-full">{children}</main>
 
                         {/* footer */}
                         <footer className={layoutCss.footer} >

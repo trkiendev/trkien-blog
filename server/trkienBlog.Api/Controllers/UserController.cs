@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using trkienBlog.Application.Users.Contracts;
-using trkienBlog.Application.Users.Services;
+using trkienBlog.Application.Users.Services.Interfaces;
 
 namespace trkienBlog.Api.Controllers
 {
@@ -8,8 +8,8 @@ namespace trkienBlog.Api.Controllers
         [Route("api/users")]
         public class UserController : ControllerBase
         {
-                private readonly UserService _userService;
-                public UserController(UserService userService)
+                private readonly IUserService _userService;
+                public UserController(IUserService userService)
                 {
                         _userService = userService;
                 }

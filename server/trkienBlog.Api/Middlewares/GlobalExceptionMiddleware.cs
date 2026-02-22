@@ -1,5 +1,7 @@
-﻿using System.Net;
+﻿using Amazon.Runtime.Internal.Util;
+using System.Net;
 using System.Text.Json;
+using trkienBlog.Application.Exceptions;
 using trkienBlog.Domain.Exceptions;
 
 namespace trkienBlog.Api.Middlewares
@@ -22,11 +24,18 @@ namespace trkienBlog.Api.Middlewares
                         try
                         {
                                 await _next(context);
-                        } catch(DomainException ex)
+                        }
+                        catch (DomainException ex)
                         {
                                 _logger.LogWarning(ex, "Domain exception occurred");
                                 await WriteResponseAsync(context, HttpStatusCode.BadRequest, ex.Message);
-                        } catch(UnauthorizedAccessException ex)
+                        }
+                        catch (NotFoundException ex)
+                        {
+                                _logger.LogInformation(ex, "Resource not found");
+                                await WriteResponseAsync(context, HttpStatusCode.NotFound, ex.Message);
+                        }
+                        catch (UnauthorizedAccessException ex)
                         {
                                 _logger.LogWarning(ex, "Unauthorized access");
                                 await WriteResponseAsync(context, HttpStatusCode.Unauthorized, "Unauthorized");

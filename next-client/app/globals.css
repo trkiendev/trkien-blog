@@ -8,8 +8,6 @@
       --primary-bg-color: #fff;
       --secondary-bg-color: #f6f8fa;
 
-      --label-color: #645f5f;
-
       --heading-title-color: #29294b;
       --secondary-color: #696981;
 }
@@ -50,16 +48,18 @@ h4::before { content: ""; background: var(--primary-fg-color); border-radius: 2p
 
 
 /* button */
-button, .button { font-family: 'Lexend', sans-serif;  padding: 8px; border-radius: 5px; height: fit-content; border: 1px solid transparent !important; font-weight: 400; cursor: pointer; }
-.default-button { font-size: 12px; background-color: #f6f8fa; box-shadow: 0px 1px 0px 0px #1f23280a; color: #696e75; cursor: pointer; user-select: none; border: 1px solid #d1d9e0 !important; display: flex; justify-content: center; align-items: center; }
-.default-button:hover { transition-duration: 80ms; background-color: #eff2f5; color: #25292e;}
+button, .button { 
+      font-family: 'Lexend', sans-serif;  
+      padding: 8px; 
+      border-radius: 5px; 
+      height: fit-content; 
+      border: 1px solid transparent !important; 
+      font-weight: 400; 
+      cursor: pointer; 
+      font-size: 11px; 
+      line-height: 1.3; 
+}
 
-.cancel-button { font-size: 12px; background: #6E6D70; color: white; user-select: none; -webkit-user-select: none; touch-action: manipulation;  }
-.cancel-button:focus { box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2), 0px 0.5px 1px rgba(0, 0, 0, 0.1), 0px 0px 0px 3.5px rgba(58, 108, 217, 0.5); outline: 0; }
-.cancel-button:hover { cursor: pointer; opacity: 0.8; }
-
-.save-button { font-size: 12px; background-color: var(--bright-blue); cursor: pointer; transition: all ease-in-out 0.2s; color: white !important; box-shadow: 0px 4px 6px -1px #0276FF31, 0px 2px 4px -1px #0276FF17; user-select: none; -webkit-user-select: none; touch-action: manipulation; }
-.save-button:hover { background-color: #0071e2; }
 
 /* border-radius */
 .border-radius-10px { border-radius: 10px;}
@@ -80,40 +80,11 @@ button, .button { font-family: 'Lexend', sans-serif;  padding: 8px; border-radiu
       font-size: 13px;
 }
 
-/* form */
-.form-label { color: var(--label-color); font-size: 13px; user-select: none; }
-.form-input { background-color: #f5f5f5; width: 100%; transition-duration: .15s; border-radius: 5px; padding: 5px 8px; }
-
 /* padding */
 .padding-0 {
       padding: 0px !important;
 }
 
-/* card */
-.primary-card .card-wrapper  {
-      border-radius: 5px;
-      background-color: white;
-      border: 1px solid #d1d9e0b3;
-      width: 100%;
-      height: fit-content;
-}    
-.primary-card .card-header {
-      font-size: 14px;
-      font-weight: bold;
-      padding: 8px;
-      border-bottom: 1px solid var(--default-border-color);
-      background-color: var(--primary-theme-color);
-}      
-.primary-card .card-body {
-      padding: 15px;
-}
-.primary-card .card-box {
-      width: 80%;
-      border: 1px solid var(--default-border-color);
-      border-radius: 5px;
-      padding: 10px;
-      user-select: none;
-}
 
 .tag-item {
       background-color: white;

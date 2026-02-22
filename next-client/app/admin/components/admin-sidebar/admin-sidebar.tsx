@@ -70,6 +70,12 @@ const sidebars = [
             label: "Content",
             href: "/admin/content",
             icon: BookOpenText,
+            children: [
+                  {
+                        label: 'Topics',
+                        href: "/admin/content/topics",
+                  }
+            ]
       },
       {
             label: "Users",

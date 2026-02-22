@@ -6,24 +6,38 @@ if (!API_BASE) {
 export async function apiFetch<T>(
       path: string,
       options: RequestInit = {}
-) : Promise<T> {
+): Promise<T> {
+      const isFormData = options.body instanceof FormData;
+
+      const headers = new Headers(options.headers);
+
+      if (!isFormData && options.body) {
+            headers.set('Content-Type', 'application/json');
+      }
+
       const res = await fetch(`${API_BASE}${path}`, {
-            headers: {
-                  'Content-Type': 'application/json',
-                  ...options.headers,
-            },
             ...options,
+            headers,
+            credentials: 'include', 
       });
 
-
-      if(!res.ok) {
+      if (!res.ok) {
+            const text = await res.text();
             let message = 'Request failed';
-            
-            const err = await res.json();
-            message = err.message ?? message;
 
-            alert(message);
+            try {
+                  const err = JSON.parse(text);
+                  message = err.message ?? message;
+            } catch {
+                  if (text) message = text;
+            }
+
             throw new Error(message);
+      }
+
+      // Trường hợp 204 NoContent
+      if (res.status === 204) {
+            return null as T;
       }
 
       return res.json() as Promise<T>;

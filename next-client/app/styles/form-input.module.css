@@ -1,0 +1,18 @@
+:root {
+      --label-color: #645f5f;
+}
+
+.formLabel { 
+      color: var(--label-color); 
+      font-size: 12px; 
+      user-select: none;
+}
+
+.formInput { 
+      background-color: #f5f5f5; 
+      width: 100%; 
+      transition-duration: .15s; 
+      border-radius: 5px; 
+      padding: 5px 8px; 
+      font-size: 12px;
+}

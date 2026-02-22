@@ -1,11 +1,12 @@
 ﻿using trkienBlog.Application.Security;
 using trkienBlog.Application.Users.Contracts;
 using trkienBlog.Application.Users.Repositories;
+using trkienBlog.Application.Users.Services.Interfaces;
 using trkienBlog.Domain.Entities;
 
 namespace trkienBlog.Application.Users.Services
 {
-        public class UserService
+        public class UserService : IUserService
         {
                 private readonly IUserRepository _userRepo;
                 private readonly IPasswordHaser _hasher;

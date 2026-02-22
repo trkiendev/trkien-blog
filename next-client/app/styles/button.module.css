@@ -1,0 +1,45 @@
+.defaultButton { 
+      background-color: #f6f8fa; 
+      box-shadow: 0px 1px 0px 0px #1f23280a; 
+      color: #696e75; 
+      cursor: pointer; 
+      user-select: none; 
+      border: 1px solid #d1d9e0 !important; 
+      display: flex; 
+      justify-content: center; 
+      align-items: center; 
+}
+.defaultButton:hover { 
+      transition-duration: 80ms; 
+      background-color: #eff2f5; 
+      color: #25292e;
+}
+
+.cancelButton { 
+      background: #6E6D70; 
+      color: white; 
+      user-select: none; 
+      -webkit-user-select: none; 
+      touch-action: manipulation;  
+}
+.cancelButton:focus { 
+      box-shadow: inset 
+            0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2), 
+            0px 0.5px 1px rgba(0, 0, 0, 0.1), 
+            0px 0px 0px 3.5px rgba(58, 108, 217, 0.5); 
+      outline: 0; 
+}
+.cancelButton:hover { cursor: pointer; opacity: 0.8; }
+
+.saveButton { 
+      font-size: 12px; 
+      background-color: var(--bright-blue); 
+      cursor: pointer; 
+      transition: all ease-in-out 0.2s; 
+      color: white !important; 
+      box-shadow: 0px 4px 6px -1px #0276FF31, 0px 2px 4px -1px #0276FF17; 
+      user-select: none; 
+      -webkit-user-select: none; 
+      touch-action: manipulation; 
+}
+.saveButton:hover { background-color: #0071e2; }

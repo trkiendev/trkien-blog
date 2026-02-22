@@ -2,22 +2,24 @@
 
 import { useState } from "react";
 import AddMemberModal from "./components/add-member-modal";
+import cardCss from "../../../styles/card.module.css";
+import buttonCss from "../../../styles/button.module.css"
 
 export default function AdminUsersMembersPage() {
       const [open, setOpen] = useState(false);
       
       return (
             <>
-                  <div className="primary-card">
-                        <div className="card-wrapper">
-                              <div className="card-header flex justify-between ">
+                  <div className={cardCss.primaryCard}>
+                        <div className={cardCss.cardWrapper}>
+                              <div className={`${cardCss.cardHeader} flex justify-between`}>
                                     <span className="content-center font-bold">Members</span>
 
-                                    <button onClick={() => setOpen(true)} className="default-button">
+                                    <button onClick={() => setOpen(true)} className={buttonCss.defaultButton}>
                                           New member
                                     </button>
                               </div>
-                              <div className="card-body">
+                              <div className="cardBody">
 
                               </div>
                         </div>

@@ -1,12 +1,18 @@
+using Amazon.S3;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using trkienBlog.Application;
 using trkienBlog.Application.Security;
 using trkienBlog.Infrastructure;
+using trkienBlog.Infrastructure.FileStorages;
 using trkienBlog.Infrastructure.Persistence;
+using Amazon;
 
+// Builder
 var builder = WebApplication.CreateBuilder(args);
 
 // Services
@@ -14,10 +20,16 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddInfrastructure();
+builder.Services.AddApplication();
+
+// AutoMapper
+builder.Services.AddAutoMapper(
+        cfg => { },
+        typeof(ApplicationMappingMarker).Assembly
+);
 
 // Database Connection
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // CORS
 builder.Services.AddCors(options =>
@@ -34,9 +46,9 @@ builder.Services.AddCors(options =>
 
 // JWT
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-        .AddJwtBearer("Bearer", options =>
+        .AddJwtBearer("Bearer", options => 
         {
-                options.TokenValidationParameters = new TokenValidationParameters
+                options.TokenValidationParameters = new TokenValidationParameters 
                 {
                         ValidateIssuer = true,
                         ValidateAudience = true,
@@ -61,6 +73,27 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 };
         });
 
+// AmazonS3Client
+builder.Services.Configure<R2Options>(builder.Configuration.GetSection("R2"));
+builder.Services.AddSingleton<IAmazonS3>(sp =>
+{
+        var options = sp.GetRequiredService<IOptions<R2Options>>().Value;
+
+        var config = new AmazonS3Config
+        {
+                ServiceURL = options.ServiceUrl,
+                ForcePathStyle = true,
+                AuthenticationRegion = "us-east-1",
+        };
+
+        return new AmazonS3Client(
+                builder.Configuration["R2:AccessKey"],
+                builder.Configuration["R2:SecretKey"],
+                config
+        );
+});
+
+// ===  Build app ===
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
