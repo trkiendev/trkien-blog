@@ -15,7 +15,8 @@ namespace trkienBlog.Infrastructure.FileStorages.Services
                 {
                         if (imageKey is null) return null;
 
-                        return $"{_options.PublicBaseUrl}/{imageKey}";
+                        var url = $"{_options.PublicBaseUrl}/{imageKey}";
+                        return url;
                 }
 
         }

@@ -154,6 +154,7 @@ export default function AdminContentTopicsPage() {
                                                                         <td>{idx + 1}</td>
                                                                         <td>{t.name}</td>
                                                                         <td>
+                                                                              <span>{t.imageUrl}</span>
                                                                               {t.imageUrl ? (
                                                                                     <Image src={t.imageUrl} alt={t.name} width={40} height={40}
                                                                                     className="rounded-md object-cover"/>

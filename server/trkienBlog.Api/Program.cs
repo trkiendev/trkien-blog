@@ -10,7 +10,6 @@ using trkienBlog.Application.Security;
 using trkienBlog.Infrastructure;
 using trkienBlog.Infrastructure.FileStorages;
 using trkienBlog.Infrastructure.Persistence;
-using Amazon;
 
 // Builder
 var builder = WebApplication.CreateBuilder(args);

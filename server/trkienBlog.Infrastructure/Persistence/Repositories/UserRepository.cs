@@ -26,8 +26,7 @@ namespace trkienBlog.Infrastructure.Persistence.Repositories
 
                 public async Task<User?> GetByUsernameAsync(string username, CancellationToken cancellation)
                 {
-                        return await _db.Users
-                                .FirstOrDefaultAsync(x => x.Username == username.Trim(), cancellation);
+                        return await _db.Users.FirstOrDefaultAsync(x => x.Username == username.Trim(), cancellation);
                 }
         }
 }

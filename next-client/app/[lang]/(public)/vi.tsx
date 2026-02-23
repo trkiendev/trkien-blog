@@ -4,7 +4,7 @@ export default function HomepageVI() {
       return (
             <>
                   <div className={style.homepageHeading}>
-                        <h1>Welcome to <span >trkien.dev</span> blog :</h1>
+                        <h1>Welcome to <span >trkien.blog</span> blog :</h1>
                         <p>Chia sẻ kiến thức lập trình phần mềm</p>
                   </div>
 

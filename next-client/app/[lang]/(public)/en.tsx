@@ -6,7 +6,7 @@ export default function HomepageEN() {
       return (
             <>
                   <div className={style.homepageHeading}>
-                        <h1>Welcome to <span >trkien.dev</span> blog : software development</h1>
+                        <h1>Welcome to <span >trkien.blog</span> blog : software development</h1>
                         <p>Sharing my ex-software knowledge</p>
                   </div>
 
