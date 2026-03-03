@@ -3,10 +3,12 @@
 import { BookOpenText, ChevronDown, Dot, LayoutDashboard, UserRoundCog } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 export default function AdminSidebar() {
       const [openKey, setOpenKey] = useState<string | null>(null);
+      const pathname = usePathname();
 
       return (
             <>
@@ -24,13 +26,13 @@ export default function AdminSidebar() {
                                     const isOpen = openKey === item.href;
 
                                     return (
-                                          <div key={item.href} className="font-size-13px">
+                                          <div key={item.href}>
                                                 {/* Parent */}
                                                 <button onClick={() => setOpenKey(isOpen ? null : item.href)}
                                                 className={`w-full p-2.5 flex items-center gap-2 rounded-md cursor-pointer transition-colors
                                                 ${isOpen ? "bg-[#0096FF] text-white" : "text-[#7d7d7d] hover:bg-[#f5f5f5] hover:text-black"}`}>
                                                       <Icon className="w-4 h-4" />
-                                                      {item.label}
+                                                      <span className="text-xs">{item.label}</span>
                                                       {/* Chevron – chỉ hiện khi có children */}
                                                       {item.children && (
                                                             <ChevronDown  className={`ml-auto w-4 h-4 transition-transform duration-200
@@ -42,13 +44,20 @@ export default function AdminSidebar() {
                                                 {item.children && (
                                                       <div className={`mt-1 space-y-1 overflow-hidden transition-all duration-200 ease-out
                                                       ${isOpen ? "max-h-40 opacity-100 translate-y-0" : "max-h-0 opacity-0 -translate-y-1"}"`}>
-                                                            {item.children.map((child) => (
-                                                                  <Link className="flex items-center gap-1 block p-2 rounded-md text-[#9a9a9a] hover:bg-[#f5f5f5] hover:text-black transition-colors"
-                                                                  key={child.href} href={child.href}>
-                                                                        <Dot className="w-4 h-4" />
-                                                                        {child.label}
-                                                                  </Link>
-                                                            ))}
+                                                            {item.children.map((child) => {
+                                                                  const isActive = pathname === child.href;
+
+                                                                  return (
+                                                                        <Link className={`text-xs flex items-center gap-1 block p-2 rounded-md text-[#9a9a9a] hover:bg-[#f5f5f5] hover:text-black transition-color
+                                                                              ${isActive ? "bg-[#f5f5f5] text-black" : ""}
+                                                                        `}
+                                                                        key={child.href} href={child.href}>
+                                                                              <Dot className="w-4 h-4" />
+                                                                              {child.label}
+                                                                        </Link>
+                                                                  )
+                                                                  
+                                                            })}
                                                       </div>
                                                 )}
                                           </div>
@@ -61,35 +70,22 @@ export default function AdminSidebar() {
 }
 
 const sidebars = [
-      {
-            label: "Dashboard",
-            href: "/admin/dashboard",
-            icon: LayoutDashboard,
+      { 
+            label: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard, 
       },
-      {
-            label: "Content",
-            href: "/admin/content",
-            icon: BookOpenText,
+      { 
+            label: "Content", href: "/admin/content", icon: BookOpenText,
             children: [
-                  {
-                        label: 'Topics',
-                        href: "/admin/content/topics",
-                  }
+                  { label: 'Topics', href: "/admin/content/topics" },
+                  { label: 'Posts', href: "/admin/content/posts" },
+                  { label: 'Tags', href: "/admin/content/tags" },
             ]
       },
-      {
-            label: "Users",
-            href: "/admin",
-            icon: UserRoundCog,
+      { 
+            label: "Users", href: "/admin", icon: UserRoundCog,
             children: [
-                  {
-                        label: "Profile",
-                        href: "/admin/users/profile",
-                  },
-                  {
-                        label: "Members",
-                        href: "/admin/users/members",
-                  },
+                  { label: "Profile", href: "/admin/users/profile", },
+                  { label: "Members", href: "/admin/users/members", },
             ],
       },
 ];

@@ -11,7 +11,7 @@ namespace trkienBlog.Infrastructure.Persistence
                         if(await dbContext.Users.AnyAsync())
                                 return;
 
-                        var admin = new User(
+                        var admin = new User (
                                 username: "admin",
                                 passwordHash: passwordHasher.Hash("trkienBlog@dmin3642")
                         );

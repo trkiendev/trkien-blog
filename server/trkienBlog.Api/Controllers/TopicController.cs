@@ -6,7 +6,6 @@ using trkienBlog.Application.FileStorages.Contracts;
 
 namespace trkienBlog.Api.Controllers
 {
-        [Authorize]
         [ApiController]
         [Route("api/topic")]
         public class TopicController : ControllerBase
@@ -34,6 +33,7 @@ namespace trkienBlog.Api.Controllers
                 #endregion
 
                 #region POST
+                [Authorize]
                 [HttpPost]
                 public async Task<IActionResult> CreateAsync([FromForm] TopicPayload payload, CancellationToken cancellation)
                 {

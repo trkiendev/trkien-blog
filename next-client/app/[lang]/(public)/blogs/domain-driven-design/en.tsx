@@ -6,7 +6,7 @@ import blogCss from "../blog.module.css";
 
 export default function DomainDrivenDesignEN() {
       return (
-            <>
+            <div className="blog-post">
                   <div className="flex gap-2">
                         <div className="flex flex-col gap-4">
                               <h1>
@@ -43,10 +43,10 @@ export default function DomainDrivenDesignEN() {
                   </div>
 
                   <div>
-                        <h2>I. Understanding: Domain Driven Design</h2>
+                        <h1>I. Understanding: Domain Driven Design</h1>
 
                         <div>
-                              <h3>WHAT</h3>
+                              <h2>WHAT</h2>
                               <p className="paragraph">
                                     <strong>DDD (Domain Driven Design) </strong> is not a specific pattern or framework, but a philosophy for building software systems around the core business domain.
                                     The business domain becomes the heart of the system, where domain-specific processes are clearly defined. When organized structure well, the project approaching DDD could be much easier to maintain and upgrade overtime.
@@ -69,7 +69,7 @@ export default function DomainDrivenDesignEN() {
                                     Therefore, it is inevitable that ERP systems must continuesly evolve to adapt to new requirements in order to properly support changing business needes.
                               </div>
 
-                              <h4>When CRUD is no longer enough</h4>
+                              <h3>When CRUD is no longer enough</h3>
                               In many ERP systems - especially in their early stages - applications are often built around a pure CRUD approach:
                               <blockquote>
                                     user enter data → the system persists it to the database → data is displayed to the client → user update or delete it.
@@ -77,7 +77,7 @@ export default function DomainDrivenDesignEN() {
                               This approach is initially simple, fast to implement, and performs well. However, as business processess grow in complexity - particularly in domain such as finance, manufacturing, and enterprise management.
                               The system gradually becomes harder to reason about and maintain if it relies solely on CRUD operations and scattered  <span className={`${spaceMono.className} ${blogCss.codeColor}`}> if-else </span> conditions.
 
-                              <h4>A Real-World ERP Example</h4>
+                              <h3>A Real-World ERP Example</h3>
                               <p>
                                     One ERP system I previously worked on was designed to manage payment requests and advanced payments at a corporate group scale.
                                     <br />
@@ -96,7 +96,7 @@ export default function DomainDrivenDesignEN() {
                                     All of these constraints can be considered business rules of the system.
                               </div>
 
-                              <h4>The Problem</h4>
+                              <h3>The Problem</h3>
                               These business rules do not exist in a single place; instead, they are repeated accross multiple workflows.
                               <br />
                               For example:
@@ -168,7 +168,7 @@ bool IsValid(Money amount)
                         </div>
 
                         <div>
-                              <h3>WHERE</h3>
+                              <h2>WHERE</h2>
                               <p>
                                     Does every ERP system need to apply Domain Driven Design ❓
                                     <br />
@@ -176,7 +176,7 @@ bool IsValid(Money amount)
                                     Whether DDD should be adopted depends on the nature of the business domain, the scale of system, and the capability of the development team - rather than treating DDD as a mandatory standard.
                               </p>
                               <div>
-                                    <h4 className="section-title">Strenght</h4>
+                                    <h3 className="section-title">Strenght</h3>
                                     <ul className="bullet-list">
                                           <li>
                                                 <strong>Maintainable Code</strong>
@@ -211,7 +211,7 @@ bool IsValid(Money amount)
                                     </ul>
                               </div>
                               <div>
-                                    <h4 className="section-title">Trade-offs and Limitations</h4>
+                                    <h3 className="section-title">Trade-offs and Limitations</h3>
                                     <ul className="bullet-list">
                                           <li>
                                                 <strong>Deep Domain Knowledge required</strong>
@@ -252,7 +252,7 @@ bool IsValid(Money amount)
                         </div>
                   
                         <div>
-                              <h3>WHEN</h3>
+                              <h2>WHEN</h2>
                               <p>So, when should Domain-Driven-Design be applied</p>
                               <br />
 
@@ -278,7 +278,7 @@ bool IsValid(Money amount)
                   </div>
 
                   <div>
-                        <h2>End</h2>
+                        <h1>End</h1>
                         <p>DDD is not "silver bullet" for every system, but it is a very powerful tool when applied with the right understanding and intent.</p>
                         <p>Ultimately, the decision to adopt DDD should not be driven by trends, but should be an architectural decision based on the real-world context of the project and the capabilities of the team.</p>
                         <p>
@@ -287,6 +287,6 @@ bool IsValid(Money amount)
                               Thank you for taking the time to read this article. I will continue to share more content about DDD in future posts.
                         </p>
                   </div>
-            </>
+            </div>
       )
 }

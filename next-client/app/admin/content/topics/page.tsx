@@ -7,7 +7,7 @@ import formInputCss from "../../../styles/form-input.module.css";
 import buttonCss from "../../../styles/button.module.css";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
-import { TopicDto, TopicRequestForm, TopicRequestPayload } from "@/domains/topic/topic.type";
+import { TopicDto, TopicRequestForm } from "@/domains/topic/topic.type";
 import { CreateTopic, GetAllTopics } from "@/domains/topic/topic.api";
 
 export default function AdminContentTopicsPage() {
@@ -19,10 +19,10 @@ export default function AdminContentTopicsPage() {
 
       // Get all topics
       useEffect(() => {
-      (async () => {
-            const data = await GetAllTopics();
-            setTopics(data);
-      })();
+            (async () => {
+                  const data = await GetAllTopics();
+                  setTopics(data);
+            })();
       }, []);
 
       // Upload topic image
@@ -79,8 +79,57 @@ export default function AdminContentTopicsPage() {
 
       return (
             <>
-                  <div className="flex gap-2">
-                        {/* Add tags form */}
+                  <div className="flex gap-6">
+
+                        {/* Table topics */}
+                        <div className="w-1/3">
+                              <div className={cardCss.primaryCard}>
+                                    <div className={cardCss.cardWrapper}>
+                                          <div className={`${cardCss.cardHeader} flex justify-center`}>
+                                                <span className="content-center font-bold">Topics</span>
+                                          </div>
+                                          <div className={cardCss.cardBody}>
+                                                <table className={tableCss.table}>
+                                                      <thead>
+                                                            <tr>
+                                                                  <th>#</th>
+                                                                  <th>Name</th>
+                                                                  <th>Image</th>
+                                                            </tr>
+                                                      </thead>
+                                                      <tbody>
+                                                            {topics.length === 0 ? (
+                                                                  <tr>
+                                                                        <td colSpan={3} className="text-center text-gray-500 py-4">
+                                                                              No topics yet
+                                                                        </td>
+                                                                  </tr>
+                                                            ) : (
+                                                                  topics.map((t, idx) => (
+                                                                        <tr key={t.id}>
+                                                                              <td>{idx + 1}</td>
+                                                                              <td>{t.name}</td>
+                                                                              <td>
+                                                                                    <div className="flex justify-center">
+                                                                                          {t.imageUrl ? (
+                                                                                                <Image src={t.imageUrl} alt={t.name} width={25} height={25}
+                                                                                                className="rounded-md object-cover"/>
+                                                                                          ) : (
+                                                                                                <span className="text-gray-400 text-xs">No image</span>
+                                                                                          )}
+                                                                                    </div>
+                                                                              </td>
+                                                                        </tr>
+                                                                  ))
+                                                            )}
+                                                            </tbody>
+                                                </table>
+                                          </div>
+                                    </div>
+                              </div>
+                        </div>
+
+                        {/* Create topics form */}
                         <form className={`${cardCss.primaryCard} w-1/3`} onSubmit={handleSubmit(onSubmit)}>
                               <div className={cardCss.cardWrapper}>
                                     <div className={`${cardCss.cardHeader} flex justify-center`}>
@@ -112,7 +161,6 @@ export default function AdminContentTopicsPage() {
                                                       { isSubmitting ? 'Submitting ...' : 'Submit' }
                                                 </button>
                                           </div>
-
                                     </div>
                               </div>
                         </form>
@@ -120,53 +168,8 @@ export default function AdminContentTopicsPage() {
                         {/* Preview uploaded image */}
                         <div className={`${cardCss.primaryCard} w-fit`}>
                               <div className={cardCss.cardWrapper}>
-                                    <div className={cardCss.cardBody}>
+                                    <div className={`${cardCss.cardBody} !p-2.5`}>
                                           <Image src={previewUrl} alt="default-thumbnail" width={300} height={300}></Image>
-                                    </div>
-                              </div>
-                        </div>
-                  </div>
-                  <div className="mt-4 w-1/3">
-                        <div className={cardCss.primaryCard}>
-                              <div className={cardCss.cardWrapper}>
-                                    <div className={`${cardCss.cardHeader} flex justify-center`}>
-                                          <span className="content-center font-bold">Topics</span>
-                                    </div>
-                                    <div className={cardCss.cardBody}>
-                                          <table className={tableCss.table}>
-                                                <thead>
-                                                      <tr>
-                                                            <th>#</th>
-                                                            <th>Name</th>
-                                                            <th>Image</th>
-                                                      </tr>
-                                                </thead>
-                                                <tbody>
-                                                      {topics.length === 0 ? (
-                                                            <tr>
-                                                                  <td colSpan={3} className="text-center text-gray-500 py-4">
-                                                                        No topics yet
-                                                                  </td>
-                                                            </tr>
-                                                      ) : (
-                                                            topics.map((t, idx) => (
-                                                                  <tr key={t.id}>
-                                                                        <td>{idx + 1}</td>
-                                                                        <td>{t.name}</td>
-                                                                        <td>
-                                                                              <span>{t.imageUrl}</span>
-                                                                              {t.imageUrl ? (
-                                                                                    <Image src={t.imageUrl} alt={t.name} width={40} height={40}
-                                                                                    className="rounded-md object-cover"/>
-                                                                              ) : (
-                                                                                    <span className="text-gray-400 text-xs">No image</span>
-                                                                              )}
-                                                                        </td>
-                                                                  </tr>
-                                                            ))
-                                                      )}
-                                                      </tbody>
-                                          </table>
                                     </div>
                               </div>
                         </div>

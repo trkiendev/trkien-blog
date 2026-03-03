@@ -10,14 +10,12 @@ export default async function AdminLayout({ children }: { children: React.ReactN
       }
 
       return (
-            <section className="flex">
-                  <aside className="w-64 shrink-0">
+            <section className="flex min-h-screen overflow-y-hidden">
+                  <aside className="w-64 shrink-0 sticky top-0 h-screen">
                         <AdminSidebar />
                   </aside>
-                  <div className="flex-1">
-                        <header className="bg-white shadow-[rgba(0, 0, 0, 0.1)_0px_1px_3px_0px, rgba(0, 0, 0, 0.06)_0px_1px_2px_0px]"></header>
-                        <main className="min-h-screen secondary-bg-color p-4">{ children }</main>
-                        <footer></footer>
+                  <div className="flex-1 flex flex-col">
+                        <main className="secondary-bg-color p-4 flex-1">{ children }</main>
                   </div>
             </section>
       );

@@ -11,7 +11,10 @@
 }
 
 .footer {
-      padding: 40px 0px;
+      padding: 10px auto;
+      width: fit-content;
+      margin: 0 auto;
+      user-select: none;
 }
 .footerCopyright {
       font-size: 13px;

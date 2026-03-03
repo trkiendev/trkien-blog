@@ -7,7 +7,7 @@ namespace trkienBlog.Infrastructure.Persistence.Configurations
         public sealed class TopicConfiguration : IEntityTypeConfiguration<Topic>
         {
                 public void Configure(EntityTypeBuilder<Topic> builder) {
-                        builder.ToTable("Content", "Topic");
+                        builder.ToTable("Topic", "Content");
 
                         builder.HasKey(x => x.Id);
 

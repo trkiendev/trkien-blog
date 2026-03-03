@@ -18,6 +18,7 @@
       border-right: 1px solid #e2e8ee;
       padding: 8px 10px;
       text-wrap: nowrap;
+      text-align: center;
 }
 
 .table thead th {
@@ -25,7 +26,7 @@
       text-align: center;
 }
 
-.table thead, .table tr, .table td {
+.table thead, .table tr {
       border-color: inherit;
       border-style: solid;
       border-width: 0;

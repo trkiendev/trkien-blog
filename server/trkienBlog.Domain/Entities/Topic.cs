@@ -2,7 +2,7 @@
 
 namespace trkienBlog.Domain.Entities
 {
-        public class Topic
+        public sealed class Topic
         {
                 #region Constructor
                 private Topic() { }

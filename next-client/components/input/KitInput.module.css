@@ -1,0 +1,33 @@
+.kitInput {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      position: static;
+}
+
+.label {
+      background: #fff;
+      width: fit-content;
+      margin: 0 0 0 6px;
+      padding: 0 2px;
+      font-size: 10px;
+      font-weight: 700;
+      position: relative;
+      top: 0.6rem;
+      color: #0096FF;
+}
+
+
+.input {
+      padding: 4px 8px;
+      font-size: 12px;
+      border: 1px #D3D3D3 solid;
+      border-radius: 5px;
+      background: white;
+      transition: all .2s ease;
+}
+
+.input:focus {
+      outline: none;
+      box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+} 

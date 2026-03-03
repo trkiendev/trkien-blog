@@ -1,5 +1,3 @@
-
-
 .primaryCard .cardWrapper  {
       border-radius: 5px;
       background-color: white;
@@ -7,16 +5,21 @@
       width: 100%;
       height: fit-content;
 }    
+
 .primaryCard .cardHeader {
       font-size: 14px;
       font-weight: bold;
       padding: 8px;
       background-color: #fff;
 }      
+
 .primaryCard .cardBody {
-      padding: 15px;
       padding: 20px;
 }
+.primaryCard .cardBody img {
+      border: 5px;
+}
+
 .primary-card .cardBox {
       width: 80%;
       border: 1px solid #696981;
