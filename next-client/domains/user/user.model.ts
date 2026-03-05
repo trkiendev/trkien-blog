@@ -1,4 +1,4 @@
-export type UserRequestForm = {
+export interface UserRequestForm {
       name: string;
       username: string;
       email: string;
@@ -6,7 +6,7 @@ export type UserRequestForm = {
       confirmPassword: string;
 };
 
-export type UserRequestPayload = {
+export interface UserRequestPayload {
       name: string;
       username: string;
       email: string;

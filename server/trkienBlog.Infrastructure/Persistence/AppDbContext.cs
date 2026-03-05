@@ -9,6 +9,7 @@ namespace trkienBlog.Infrastructure.Persistence
 
                 public DbSet<User> Users => Set<User>();
                 public DbSet<Topic> Topics => Set<Topic>();     
+                public DbSet<Tag> Tags => Set<Tag>();
 
                 protected override void OnModelCreating(ModelBuilder modelBuilder)
                 {

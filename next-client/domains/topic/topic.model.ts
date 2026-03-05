@@ -1,14 +1,14 @@
-export type TopicRequestPayload = {
+export interface TopicRequestPayload {
       name: string;
       image?: File;
 }
 
-export type TopicRequestForm = {
+export interface TopicRequestForm {
       name: string;
       image: File;
 }
 
-export type TopicDto = {
+export interface TopicDto {
       id: string;
       name: string;
       imageUrl?: string | null;

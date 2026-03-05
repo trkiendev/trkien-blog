@@ -1,7 +1,7 @@
 'use client';
 
 import { CreateUser } from "@/domains/user/user.api";
-import { UserRequestForm, UserRequestPayload } from "@/domains/user/user.type";
+import { UserRequestForm, UserRequestPayload } from "@/domains/user/user.model";
 import { Eye, EyeOff, SquareX } from "lucide-react";
 import { useState } from "react";
 import { useForm } from 'react-hook-form';
@@ -22,7 +22,7 @@ export default function AddMemberModal({ open, onClose }: AddMemberModalProps) {
             handleSubmit,
             watch,
             formState: { errors, isSubmitting }
-      } = useForm<UserRequestForm>({ });
+      } = useForm<UserRequestForm>({});
       const password = watch('password');
 
       if (!open) return null;
@@ -39,25 +39,25 @@ export default function AddMemberModal({ open, onClose }: AddMemberModalProps) {
                   await CreateUser(payload);
                   alert('Success');
                   onClose();
-            } catch(err) {
+            } catch (err) {
                   alert(err instanceof Error ? err.message : 'Create user failed');
             }
       };
 
-      return(
+      return (
             <div className="fixed inset-0 z-50 flex items-center justify-center">
 
                   {/* Backdrop */}
-                  <div className="absolute inset-0 bg-black/50" onClick={onClose}/>
+                  <div className="absolute inset-0 bg-black/50" onClick={onClose} />
 
                   {/* Modal */}
                   <form className="relative w-[520px] rounded-md bg-white modal-shadow"
-                  onSubmit={handleSubmit(onSubmit)}>
+                        onSubmit={handleSubmit(onSubmit)}>
                         {/* Header */}
                         <div className="flex items-center justify-between px-5 py-3">
                               <span className="font-semibold">Add new user</span>
                               <button type="button" onClick={onClose} className="cursor-pointer text-gray-400 hover:text-red-500 padding-0 transition-transform duration-200">
-                                    <SquareX/>
+                                    <SquareX />
                               </button>
                         </div>
 
@@ -65,7 +65,7 @@ export default function AddMemberModal({ open, onClose }: AddMemberModalProps) {
                         <div className="space-y-4 px-5 py-4">
                               <div>
                                     <label className={formInputCss.formLabel}>Name</label>
-                                    <input className={`${formInputCss.formInput} w-full`} 
+                                    <input className={`${formInputCss.formInput} w-full`}
                                           {...register('name', { required: 'Name is required' })}
                                     />
                                     {errors.name && (
@@ -74,8 +74,8 @@ export default function AddMemberModal({ open, onClose }: AddMemberModalProps) {
                               </div>
                               <div>
                                     <label className={formInputCss.formLabel}>Username</label>
-                                    <input className={`${formInputCss.formInput} w-full`} 
-                                          {...register('username', { required: 'Username is required' })} 
+                                    <input className={`${formInputCss.formInput} w-full`}
+                                          {...register('username', { required: 'Username is required' })}
                                     />
                                     {errors.username && (
                                           <p className="text-red-500 text-xs mt-1">{errors.username.message}</p>
@@ -83,14 +83,14 @@ export default function AddMemberModal({ open, onClose }: AddMemberModalProps) {
                               </div>
                               <div>
                                     <label className={formInputCss.formLabel}>E-mail</label>
-                                    <input type="email" className={`${formInputCss.formInput} w-full`}  
+                                    <input type="email" className={`${formInputCss.formInput} w-full`}
                                           {...register('email', {
                                                 required: 'Email is required',
                                                 pattern: {
                                                       value: /^\S+@\S+$/i,
                                                       message: 'Invalid email format'
                                                 }
-                                          })} 
+                                          })}
                                     />
                                     {errors.email && (
                                           <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>
@@ -99,17 +99,17 @@ export default function AddMemberModal({ open, onClose }: AddMemberModalProps) {
                               <div>
                                     <label className={formInputCss.formLabel}>Password</label>
                                     <div className="relative">
-                                          <input  type={showPassword ? 'text' : 'password'} className={`${formInputCss.formInput} w-full pr-10`}  
+                                          <input type={showPassword ? 'text' : 'password'} className={`${formInputCss.formInput} w-full pr-10`}
                                                 {...register('password', {
                                                       required: 'Password is required',
                                                       minLength: { value: 6, message: 'Min 6 characters' }
-                                                })} 
+                                                })}
                                           />
                                           <button type="button" onClick={() => setShowPassword(v => !v)}
-                                          className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700 padding-0">
-                                                { showPassword ? <EyeOff size={16}/> : <Eye size={16}/>}
+                                                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700 padding-0">
+                                                {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                                           </button>
-                                    </div>   
+                                    </div>
                                     {errors.password && (
                                           <p className="text-red-500 text-xs mt-1">{errors.password.message}</p>
                                     )}
@@ -119,13 +119,13 @@ export default function AddMemberModal({ open, onClose }: AddMemberModalProps) {
                                     <div className="relative">
                                           <input type={showConfirmPassword ? 'text' : 'password'} className={`${formInputCss.formInput} w-full pr-10`}
                                                 {...register('confirmPassword', {
-                                                validate: value =>
-                                                      value === password || 'Passwords do not match'
+                                                      validate: value =>
+                                                            value === password || 'Passwords do not match'
                                                 })}
                                           />
                                           <button type="button" onClick={() => setShowConfirmPassword(v => !v)}
-                                          className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700 padding-0">
-                                                { showConfirmPassword ? <EyeOff size={16}/> : <Eye size={16}/>}
+                                                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700 padding-0">
+                                                {showConfirmPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                                           </button>
                                     </div>
                                     {errors.confirmPassword && (
@@ -137,7 +137,7 @@ export default function AddMemberModal({ open, onClose }: AddMemberModalProps) {
                         {/* Footer */}
                         <div className="flex justify-end gap-2 px-5 py-3">
                               <button type="button" className={`${buttonCss.cancelButton} flex-1`} onClick={onClose}>Cancel</button>
-                              <button type="submit" className={`${buttonCss.saveButton} flex-1`}  disabled={isSubmitting}>
+                              <button type="submit" className={`${buttonCss.saveButton} flex-1`} disabled={isSubmitting}>
                                     {isSubmitting ? 'Submitting ...' : 'Submit'}
                               </button>
                         </div>

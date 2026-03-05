@@ -7,7 +7,7 @@ using trkienBlog.Application.FileStorages.Contracts;
 namespace trkienBlog.Api.Controllers
 {
         [ApiController]
-        [Route("api/topic")]
+        [Route("api/topics")]
         public class TopicController : ControllerBase
         {
                 private readonly ITopicService _topic;

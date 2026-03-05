@@ -7,7 +7,7 @@ import formInputCss from "../../../styles/form-input.module.css";
 import buttonCss from "../../../styles/button.module.css";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
-import { TopicDto, TopicRequestForm } from "@/domains/topic/topic.type";
+import { TopicDto, TopicRequestForm } from "@/domains/topic/topic.model";
 import { CreateTopic, GetAllTopics } from "@/domains/topic/topic.api";
 
 export default function AdminContentTopicsPage() {
@@ -29,10 +29,10 @@ export default function AdminContentTopicsPage() {
       const handleChooseFile = () => {
             fileRef.current?.click();
       }
- 
+
       const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
             const file = e.target.files?.[0];
-            if(file) {
+            if (file) {
                   setFileName(file.name);
                   setSelectedFile(file);
 
@@ -55,24 +55,24 @@ export default function AdminContentTopicsPage() {
       }, [previewUrl]);
 
       // form
-      const { 
+      const {
             register,
             handleSubmit,
             formState: { errors, isSubmitting }
       } = useForm<TopicRequestForm>({});
 
-      const onSubmit = async(data: TopicRequestForm) => {
+      const onSubmit = async (data: TopicRequestForm) => {
             try {
                   const formData = new FormData();
                   formData.append("name", data.name);
 
-                  if(selectedFile) {
+                  if (selectedFile) {
                         formData.append("image", selectedFile);
                   }
 
                   var response = await CreateTopic(formData);
                   alert('Success');
-            } catch(err) {
+            } catch (err) {
                   alert(err instanceof Error ? err.message : 'Create topic failed');
             }
       }
@@ -113,7 +113,7 @@ export default function AdminContentTopicsPage() {
                                                                                     <div className="flex justify-center">
                                                                                           {t.imageUrl ? (
                                                                                                 <Image src={t.imageUrl} alt={t.name} width={25} height={25}
-                                                                                                className="rounded-md object-cover"/>
+                                                                                                      className="rounded-md object-cover" />
                                                                                           ) : (
                                                                                                 <span className="text-gray-400 text-xs">No image</span>
                                                                                           )}
@@ -122,7 +122,7 @@ export default function AdminContentTopicsPage() {
                                                                         </tr>
                                                                   ))
                                                             )}
-                                                            </tbody>
+                                                      </tbody>
                                                 </table>
                                           </div>
                                     </div>
@@ -140,15 +140,15 @@ export default function AdminContentTopicsPage() {
                                           <div>
                                                 <label className={formInputCss.formLabel}>Name</label>
                                                 <input className={`${formInputCss.formInput} w-full`}
-                                                {...register('name', { required: 'Name is required' })}/>
+                                                      {...register('name', { required: 'Name is required' })} />
                                                 {errors.name && (
                                                       <p className="text-red-500 text-xs mt-1">{errors.name.message}</p>
                                                 )}
                                           </div>
 
-                                          {/* topic image */}     
+                                          {/* topic image */}
                                           <div>
-                                                <input type="file" ref={fileRef} className="hidden" onChange={handleFileChange}/>
+                                                <input type="file" ref={fileRef} className="hidden" onChange={handleFileChange} />
                                                 <div className="flex gap-2">
                                                       <button type="button" onClick={handleChooseFile} className={buttonCss.defaultButton}>Chọn hình ảnh</button>
                                                       <span className="text-gray-500 text-xs content-center">{fileName}</span>
@@ -158,7 +158,7 @@ export default function AdminContentTopicsPage() {
                                           {/* submit button */}
                                           <div className="flex justify-center">
                                                 <button type="submit" className={buttonCss.saveButton} disabled={isSubmitting}>
-                                                      { isSubmitting ? 'Submitting ...' : 'Submit' }
+                                                      {isSubmitting ? 'Submitting ...' : 'Submit'}
                                                 </button>
                                           </div>
                                     </div>

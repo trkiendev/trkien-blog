@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using trkienBlog.Application.Auth.Services;
+using trkienBlog.Application.Contents.Tags.Repositories;
 using trkienBlog.Application.Contents.Topics.Repositories;
 using trkienBlog.Application.FileStorage.Services;
 using trkienBlog.Application.FileStorages.Services;
@@ -27,6 +28,7 @@ namespace trkienBlog.Infrastructure
                         // Repositories
                         services.AddScoped<IUserRepository, UserRepository>();
                         services.AddScoped<ITopicRepository, TopicRepository>();
+                        services.AddScoped<ITagRepository, TagRepository>();
 
                         return services;
                 }
