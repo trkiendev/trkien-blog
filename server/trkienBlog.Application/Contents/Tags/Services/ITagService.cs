@@ -4,6 +4,7 @@ namespace trkienBlog.Application.Contents.Tags.Services
 {
         public interface ITagService
         {
+                Task<IReadOnlyList<TagTableDto>> GetTable(CancellationToken cancellation);
                 Task<TagDto> CreateAsync(string name, string slug, CancellationToken cancellation);
         }
 }

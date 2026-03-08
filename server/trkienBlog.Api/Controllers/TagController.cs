@@ -15,6 +15,16 @@ namespace trkienBlog.Api.Controllers
                         _tagService = tagService;       
                 }
 
+                #region GET
+                [Authorize]
+                [HttpGet]
+                public async Task<IActionResult> GetTables(CancellationToken cancellation)
+                {
+                        var table = await _tagService.GetTable(cancellation);   
+                        return Ok(table);
+                }
+                #endregion
+
                 #region POST
                 [Authorize]
                 [HttpPost]

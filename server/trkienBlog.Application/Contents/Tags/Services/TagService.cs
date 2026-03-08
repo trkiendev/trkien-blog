@@ -12,6 +12,12 @@ namespace trkienBlog.Application.Contents.Tags.Services
                         _tagRepo = tagRepo;     
                 }
 
+                // GetTable
+                public async Task<IReadOnlyList<TagTableDto>> GetTable(CancellationToken cancellation)
+                {
+                        return await _tagRepo.GetTableAsync(cancellation);
+                }
+
                 // Create
                 public async Task<TagDto> CreateAsync(string name, string slug, CancellationToken cancellation)
                 {

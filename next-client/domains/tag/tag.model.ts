@@ -17,3 +17,11 @@ export interface TagDto {
       displayOrder: number;
       createdAt: string;
 }
+
+export interface TagTableDto {
+      id: string;
+      name: string;
+      slug: string;
+      isActive: boolean;
+      isVisible: boolean;
+}
