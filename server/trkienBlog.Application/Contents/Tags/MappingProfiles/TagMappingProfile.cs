@@ -12,6 +12,8 @@ namespace trkienBlog.Application.Contents.Tags.MappingProfiles
                         CreateMap<Tag, TagBriefDto>();
 
                         CreateMap<Tag, TagTableDto>();
+
+                        CreateMap<Tag, TagLookupDto>();  
                 }
         }
 }

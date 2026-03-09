@@ -18,6 +18,12 @@ namespace trkienBlog.Application.Contents.Tags.Services
                         return await _tagRepo.GetTableAsync(cancellation);
                 }
 
+                // GetLookup
+                public async Task<IReadOnlyList<TagLookupDto>> ListLookupAsync(CancellationToken cancellation)
+                {
+                        return await _tagRepo.ListLookupAsync(cancellation);
+                }
+
                 // Create
                 public async Task<TagDto> CreateAsync(string name, string slug, CancellationToken cancellation)
                 {

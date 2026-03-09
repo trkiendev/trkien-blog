@@ -17,12 +17,21 @@ namespace trkienBlog.Infrastructure.Persistence.Repositories
                         _mapperConfig = mapperConfig;
                 }
 
+                #region GET
                 public async Task<IReadOnlyList<TagTableDto>> GetTableAsync(CancellationToken cancellation)
                 {
                         return await _db.Tags.AsNoTracking()
                                 .ProjectTo<TagTableDto>(_mapperConfig)
                                 .ToListAsync(cancellation);
                 }
+
+                public async Task<IReadOnlyList<TagLookupDto>> ListLookupAsync(CancellationToken cancellation)
+                {
+                        return await _db.Tags.AsNoTracking()
+                                .ProjectTo<TagLookupDto>(_mapperConfig)
+                                .ToListAsync(cancellation);
+                }
+                #endregion 
 
                 public async Task AddAsync(Tag tag, CancellationToken cancellation)
                 {

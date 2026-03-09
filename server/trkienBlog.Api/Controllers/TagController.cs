@@ -23,6 +23,14 @@ namespace trkienBlog.Api.Controllers
                         var table = await _tagService.GetTable(cancellation);   
                         return Ok(table);
                 }
+
+                [Authorize]
+                [HttpGet("lookup")]       
+                public async Task<IActionResult> ListLookup(CancellationToken cancellation)
+                {
+                        var lookups = await _tagService.ListLookupAsync(cancellation);  
+                        return Ok(lookups);
+                }
                 #endregion
 
                 #region POST

@@ -1,0 +1,91 @@
+.dropdown {
+      position: relative;
+      width: 100%;
+      font-size: 12px;
+      color: #737373;
+      line-height: 1.5;
+}
+
+.control {
+      padding: 5px 5px;
+      border: 1px solid #dcdcdc;
+      border-radius: 4px;
+      background: #ffffff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      transition: all .2s ease;
+}
+.control:hover {
+      background: #f6f8fa;
+      box-shadow: rgba(14, 63, 126, 0.06) 0px 0px 0px 1px, rgba(42, 51, 70, 0.03) 0px 1px 1px -0.5px, rgba(42, 51, 70, 0.04) 0px 2px 2px -1px, rgba(42, 51, 70, 0.04) 0px 3px 3px -1.5px, rgba(42, 51, 70, 0.03) 0px 5px 5px -2.5px, rgba(42, 51, 70, 0.03) 0px 10px 10px -5px, rgba(42, 51, 70, 0.03) 0px 24px 24px -8px;
+}
+
+.menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      border: 1px solid #dcdcdc;
+      border-radius: 4px;
+      background: white;
+      list-style: none;
+
+      max-height: 200px;
+      overflow-y: auto;
+
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+
+      /* trạng thái đóng */
+      opacity: 0;
+      transform: translateY(-4px) scale(.98);
+      pointer-events: none;
+
+
+
+      transition: opacity 100s ease, transform 100s;
+}
+
+.open {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+      transition: opacity 100s ease, transform 100s;
+}
+
+.item {
+      padding: 6px 10px;
+      cursor: pointer;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+}
+
+.item:hover {
+      background: #f6f8fa;
+      color: black;
+}
+
+.selected {
+      background: aliceblue;
+      color: var(--bright-blue);
+}
+.selected:hover {
+      color: red;
+      background: #fff6f6;
+}
+
+.disabled {
+      opacity: 0.6;
+      pointer-events: none;
+}
+
+/* Multiple */
+.values {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+}

@@ -1,4 +1,5 @@
-﻿using trkienBlog.Application.Contents.Topics.Contracts;
+﻿using trkienBlog.Application.Contents.Tags.Contracts;
+using trkienBlog.Application.Contents.Topics.Contracts;
 using trkienBlog.Application.Contents.Topics.Repositories;
 using trkienBlog.Application.Contents.Topics.Services.Interfaces;
 using trkienBlog.Application.Exceptions;
@@ -21,6 +22,7 @@ namespace trkienBlog.Application.Contents.Topics.Services
                         _urlBuilder = urlBuilder;
                 }
 
+                #region GET
                 // GetById
                 public async Task<TopicDto?> GetByIdAsync(Guid id, CancellationToken cancellation)
                 {
@@ -42,7 +44,9 @@ namespace trkienBlog.Application.Contents.Topics.Services
                                 imageUrl = _urlBuilder.Build(x.ImageKey)
                         }).ToList();
                 }
+                #endregion
 
+                #region Create
                 // Create
                 public async Task<TopicDto> CreateAsync(string name, FileUploadDto? image, CancellationToken cancellation)
                 {
@@ -66,5 +70,6 @@ namespace trkienBlog.Application.Contents.Topics.Services
                                 imageUrl = _urlBuilder.Build(imageKey)
                         };
                 }
+                #endregion
         }
 }

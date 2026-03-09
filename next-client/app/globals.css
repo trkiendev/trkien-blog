@@ -76,7 +76,7 @@ header {
 }
 
 /* button */
-button, .button { 
+button, a, .button { 
       font-family: 'Lexend', sans-serif;  
       padding: 8px; 
       border-radius: 5px; 

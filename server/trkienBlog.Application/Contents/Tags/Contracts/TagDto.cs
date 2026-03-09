@@ -26,4 +26,10 @@
                 public string Name { get; init; } = default!;
                 public string Slug { get; init; } = default!;
         }
+
+        public sealed record TagLookupDto
+        {
+                public Guid Id { get; init; }
+                public string Name { get; init; } = default!;
+        }
 }

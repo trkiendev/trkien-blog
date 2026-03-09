@@ -25,3 +25,8 @@ export interface TagTableDto {
       isActive: boolean;
       isVisible: boolean;
 }
+
+export interface TagLookupDto {
+      id: string;
+      name: string;
+}
