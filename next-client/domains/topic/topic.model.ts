@@ -13,3 +13,9 @@ export interface TopicDto {
       name: string;
       imageUrl?: string | null;
 }
+
+export interface TopicLookupDto {
+      id: string;
+      name: string;
+      imageKey?: string | null;
+}

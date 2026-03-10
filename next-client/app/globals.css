@@ -96,14 +96,10 @@ button, a, .button {
       box-shadow: rgba(244, 246, 247, 0.91) 0px 2px 4px 0px, rgba(244, 249, 251, 0.96) 0px 2px 16px 0px;
 }
 
-
-
 /* color  */
 .secondary-bg-color {
       background-color: #f6f8fa;
 }
-
-
 
 .tag-item {
       background-color: white;
@@ -199,3 +195,11 @@ blockquote {
       word-break: break-word;
 }
 
+.label {
+      background: #f6f8fa;
+      padding: 2px;
+      box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+      border-radius: 3px;
+      width: fit-content;
+      font-size: 10px;
+}

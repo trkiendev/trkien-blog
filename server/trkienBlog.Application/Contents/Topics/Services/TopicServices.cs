@@ -1,4 +1,4 @@
-﻿using trkienBlog.Application.Contents.Tags.Contracts;
+﻿using AutoMapper;
 using trkienBlog.Application.Contents.Topics.Contracts;
 using trkienBlog.Application.Contents.Topics.Repositories;
 using trkienBlog.Application.Contents.Topics.Services.Interfaces;
@@ -15,11 +15,17 @@ namespace trkienBlog.Application.Contents.Topics.Services
                 private readonly IFileStorageService _storage;
                 private readonly ITopicRepository _topicRepo;
                 private readonly IFileUrlBuilder _urlBuilder;
-                public TopicServices(IFileStorageService storage, ITopicRepository topicRepo, IFileUrlBuilder urlBuilder)
-                {
+                private readonly IMapper _mapper;
+                public TopicServices(
+                        IFileStorageService storage, 
+                        ITopicRepository topicRepo, 
+                        IFileUrlBuilder urlBuilder,
+                        IMapper mapper
+                ) {
                         _storage = storage;
                         _topicRepo = topicRepo;
                         _urlBuilder = urlBuilder;
+                        _mapper = mapper;
                 }
 
                 #region GET
@@ -42,6 +48,19 @@ namespace trkienBlog.Application.Contents.Topics.Services
                                 Id = x.Id,
                                 Name = x.Name,
                                 imageUrl = _urlBuilder.Build(x.ImageKey)
+                        }).ToList();
+                }
+
+                // Lookup
+                public async Task<IReadOnlyList<TopicLookupDto>> ListLookupAsync(CancellationToken cancellation)
+                {
+                        var lookups = await _topicRepo.ListLookupAsync(cancellation);
+
+                        return lookups.Select(x => new TopicLookupDto
+                        {
+                                Id = x.Id,
+                                Name = x.Name,
+                                ImageKey = _urlBuilder.Build(x.ImageKey)
                         }).ToList();
                 }
                 #endregion

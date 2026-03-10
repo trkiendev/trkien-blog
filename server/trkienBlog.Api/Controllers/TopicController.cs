@@ -30,6 +30,13 @@ namespace trkienBlog.Api.Controllers
                         var list = await _topic.ListAllAsync(cancellation);
                         return Ok(list);
                 }
+
+                [HttpGet("lookup")]
+                public async Task<IActionResult> ListLookup(CancellationToken cancellation)
+                {
+                        var lookups = await _topic.ListLookupAsync(cancellation);
+                        return Ok(lookups);
+                }
                 #endregion
 
                 #region POST

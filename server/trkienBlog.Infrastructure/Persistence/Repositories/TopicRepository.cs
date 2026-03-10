@@ -19,6 +19,7 @@ namespace trkienBlog.Infrastructure.Persistence.Repositories
                 }
 
                 #region Read
+                // Validation
                 public async Task<bool> ExistByNameAsync(string name, CancellationToken cancellation)
                 {
                         if (string.IsNullOrEmpty(name))
@@ -26,6 +27,13 @@ namespace trkienBlog.Infrastructure.Persistence.Repositories
 
                         return await _db.Topics.AsNoTracking()
                                 .AnyAsync(x => x.Name == name.Trim(), cancellation);
+                }
+
+                public async Task<List<Topic>> ListAllAsync(CancellationToken cancellation)
+                {
+                        return await _db.Topics.AsNoTracking()
+                                .OrderBy(x => x.Name)
+                                .ToListAsync(cancellation);
                 }
 
                 public async Task<TopicDto?> GetByIdAsync(Guid id, CancellationToken cancellation)
@@ -36,10 +44,10 @@ namespace trkienBlog.Infrastructure.Persistence.Repositories
                                 .FirstOrDefaultAsync(cancellation);
                 } 
 
-                public async Task<List<Topic>> ListAllAsync(CancellationToken cancellation)
+                public async Task<List<TopicLookupDto>> ListLookupAsync(CancellationToken cancellation)
                 {
                         return await _db.Topics.AsNoTracking()
-                                .OrderBy(x => x.Name)
+                                .ProjectTo<TopicLookupDto>(_mapperConfig)
                                 .ToListAsync(cancellation);
                 }
                 #endregion

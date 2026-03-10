@@ -113,7 +113,7 @@ export default function AdminContentTopicsPage() {
                                                                                     <div className="flex justify-center">
                                                                                           {t.imageUrl ? (
                                                                                                 <Image src={t.imageUrl} alt={t.name} width={25} height={25}
-                                                                                                      className="rounded-md object-cover" />
+                                                                                                className="rounded-md object-cover" />
                                                                                           ) : (
                                                                                                 <span className="text-gray-400 text-xs">No image</span>
                                                                                           )}

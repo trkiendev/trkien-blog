@@ -3,6 +3,7 @@ import dropdownCss from "./MyDropdown.module.css";
 import { ChevronDown } from "lucide-react";
 
 type MultipleDropdownProps<T> = {
+      dropdownLabel?: string
       items: T[]
       getValue: (item: T) => string
       getLabel: (item: T) => string
@@ -14,6 +15,7 @@ type MultipleDropdownProps<T> = {
 }
 
 export default function MultipleDropdown<T>({
+      dropdownLabel,
       items,
       getValue,
       getLabel,
@@ -57,6 +59,13 @@ export default function MultipleDropdown<T>({
 
       return (
             <div ref={containerRef} className={`${dropdownCss.dropdown} ${disabled ? dropdownCss.disabled : ""}`}>
+                  {/* label */}
+                  {dropdownLabel && (
+                        <label className={dropdownCss.label}>
+                              {dropdownLabel}
+                        </label>
+                  )}
+
                   {/* control */}
                   <div className={dropdownCss.control} onClick={() => !disabled && setOpen(v => !v)}>
                         <div className={dropdownCss.values}>

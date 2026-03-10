@@ -10,6 +10,8 @@ namespace trkienBlog.Application.Contents.Topics.MappingProfiles
                 {
                         CreateMap<Topic, TopicDto>()
                                 .ForMember(d => d.imageUrl, opt => opt.Ignore());
+
+                        CreateMap<Topic, TopicLookupDto>();
                 }
-        }
+        } 
 }

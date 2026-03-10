@@ -1,11 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import dropdownCss from "./MyDropdown.module.css";
 import { ChevronDown } from "lucide-react";
+import Image from "next/image";
 
 type SingleDropdownProps<T> = {
+      dropdownLabel?: string;
       items: T[];
       getValue: (item: T) => string
       getLabel: (item: T) => string
+      getImageUrl?: (item: T) => string | null | undefined
       value?: string;
       placeholder?: string;
       disabled?: boolean;
@@ -14,9 +17,11 @@ type SingleDropdownProps<T> = {
 }
 
 export default function SingleDropdown<T>({
+      dropdownLabel,
       items,
       getValue,
       getLabel,
+      getImageUrl,
       value,
       placeholder = "-- Select --",
       disabled = false,
@@ -46,9 +51,28 @@ export default function SingleDropdown<T>({
 
       return (
             <div ref={containerRef} className={`${dropdownCss.dropdown} ${disabled ? dropdownCss.disabled : ""}`}>
+                  {/* label */}
+                  {dropdownLabel && (
+                        <label className={dropdownCss.label}>
+                              {dropdownLabel}
+                        </label>
+                  )}
+                  
                   {/* control */}
                   <div className={dropdownCss.control} onClick={() => !disabled && setOpen(v => !v)}>
-                        { loading ? "Loading..." : selectedItem ? getLabel(selectedItem) : placeholder}
+                        {loading ? ("Loading...") : selectedItem ? (
+                              <div className="flex items-center gap-2">
+                                    {getImageUrl && getImageUrl(selectedItem) && (
+                                          <Image src={getImageUrl(selectedItem)!}
+                                                className="rounded-sm object-cover"
+                                                alt={getLabel(selectedItem)}
+                                          width={18} height={18}/>
+                                    )}
+                                    <span>{getLabel(selectedItem)}</span>
+                              </div>
+                        ) : (
+                              placeholder
+                        )}
                         <span><ChevronDown size={15} /></span>
                   </div>
 
@@ -56,8 +80,8 @@ export default function SingleDropdown<T>({
                   { open && (
                         <ul className={`${dropdownCss.menu} ${open ? dropdownCss.open : ""}`}>
                               {items.map(item => {
-                                    const val = getValue(item)
-                                    const label = getLabel(item)
+                                    const val = getValue(item);
+                                    const label = getLabel(item);
 
                                     return (
                                           <li key={val}
@@ -66,7 +90,11 @@ export default function SingleDropdown<T>({
                                                 }`}
                                                 onClick={() => handleSelect(val)}
                                           >
-                                                { label }
+                                                {getImageUrl && getImageUrl(item) && (
+                                                      <Image src={getImageUrl(item)!} className="rounded-sm object-cover" alt={label}
+                                                      width={18} height={18}></Image>
+                                                )}
+                                                <span>{ label }</span>
                                           </li>
                                     )
                               })}
