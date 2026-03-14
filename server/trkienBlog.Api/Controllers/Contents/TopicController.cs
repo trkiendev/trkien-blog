@@ -1,19 +1,22 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using trkienBlog.Api.Contracts;
+using trkienBlog.Application.Contents.Topics.Commands;
+using trkienBlog.Application.Contents.Topics.Contracts;
 using trkienBlog.Application.Contents.Topics.Services.Interfaces;
-using trkienBlog.Application.FileStorages.Contracts;
 
-namespace trkienBlog.Api.Controllers
+namespace trkienBlog.Api.Controllers.Contents
 {
         [ApiController]
         [Route("api/topics")]
         public class TopicController : ControllerBase
         {
                 private readonly ITopicService _topic;
-                public TopicController(ITopicService topic)
+                private readonly IMediator _mediator;
+                public TopicController(ITopicService topic, IMediator mediator)
                 {
                         _topic = topic;
+                        _mediator = mediator;   
                 }
 
                 #region GET
@@ -44,24 +47,8 @@ namespace trkienBlog.Api.Controllers
                 [HttpPost]
                 public async Task<IActionResult> CreateAsync([FromForm] TopicPayload payload, CancellationToken cancellation)
                 {
-                        FileUploadDto? fileUpload = null;
-
-                        if(payload.Image is not null)
-                        {
-                                fileUpload = new FileUploadDto (
-                                        payload.Image.OpenReadStream(),
-                                        payload.Image.FileName,
-                                        payload.Image.ContentType
-                                );
-                        }
-
-                        var dto = await _topic.CreateAsync(payload.Name, fileUpload, cancellation);
-
-                        return CreatedAtAction (
-                                nameof(GetById),
-                                new { id = dto.Id },
-                                dto
-                        );
+                        var dto = await _mediator.Send(new CreateTopicCommand(payload), cancellation);
+                        return Ok(dto); 
                 }
                 #endregion
         }

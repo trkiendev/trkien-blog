@@ -1,13 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using trkienBlog.Domain.Entities;
+using trkienBlog.Domain.Entities.Content;
 
 namespace trkienBlog.Infrastructure.Persistence.Configurations
 {
         public sealed class TopicConfiguration : IEntityTypeConfiguration<Topic>
         {
                 public void Configure(EntityTypeBuilder<Topic> builder) {
-                        builder.ToTable("Topic", "Content");
+                        builder.ToTable("Topics", "Content");
 
                         builder.HasKey(x => x.Id);
 

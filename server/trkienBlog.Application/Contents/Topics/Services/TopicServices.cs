@@ -1,12 +1,11 @@
 ﻿using AutoMapper;
 using trkienBlog.Application.Contents.Topics.Contracts;
-using trkienBlog.Application.Contents.Topics.Repositories;
 using trkienBlog.Application.Contents.Topics.Services.Interfaces;
 using trkienBlog.Application.Exceptions;
 using trkienBlog.Application.FileStorage.Services;
 using trkienBlog.Application.FileStorages.Contracts;
 using trkienBlog.Application.FileStorages.Services;
-using trkienBlog.Domain.Entities;
+using trkienBlog.Domain.Entities.Content;
 
 namespace trkienBlog.Application.Contents.Topics.Services
 {

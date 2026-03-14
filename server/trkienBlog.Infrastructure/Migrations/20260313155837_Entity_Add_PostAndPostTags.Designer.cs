@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using trkienBlog.Infrastructure.Persistence;
@@ -11,9 +12,11 @@ using trkienBlog.Infrastructure.Persistence;
 namespace trkienBlog.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260313155837_Entity_Add_PostAndPostTags")]
+    partial class Entity_Add_PostAndPostTags
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,8 +49,8 @@ namespace trkienBlog.Infrastructure.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("integer");
 
-                    b.Property<string>("ThumbnailKey")
-                        .HasColumnType("text");
+                    b.Property<Guid?>("ThumbnailFileId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -62,7 +65,7 @@ namespace trkienBlog.Infrastructure.Migrations
                     b.HasIndex("Slug")
                         .IsUnique();
 
-                    b.ToTable("Posts", "Content");
+                    b.ToTable("Posts", (string)null);
                 });
 
             modelBuilder.Entity("trkienBlog.Domain.Entities.Content.Tag", b =>
@@ -111,7 +114,7 @@ namespace trkienBlog.Infrastructure.Migrations
                     b.HasIndex("Slug")
                         .IsUnique();
 
-                    b.ToTable("Tags", "Content");
+                    b.ToTable("Tag", "Content");
                 });
 
             modelBuilder.Entity("trkienBlog.Domain.Entities.Content.Topic", b =>
@@ -141,7 +144,7 @@ namespace trkienBlog.Infrastructure.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("Topics", "Content");
+                    b.ToTable("Topic", "Content");
                 });
 
             modelBuilder.Entity("trkienBlog.Domain.Entities.Contents.PostTag", b =>

@@ -1,6 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
 
-namespace trkienBlog.Api.Contracts
+namespace trkienBlog.Application.Contents.Topics.Contracts
 {
         public sealed record TopicPayload
         {

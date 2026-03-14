@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using trkienBlog.Domain.Entities;
+using trkienBlog.Domain.Entities.Content;
 
 namespace trkienBlog.Infrastructure.Persistence.Configurations
 {
@@ -8,7 +8,7 @@ namespace trkienBlog.Infrastructure.Persistence.Configurations
         {
                 public void Configure(EntityTypeBuilder<Tag> builder)
                 {
-                        builder.ToTable("Tag", "Content");
+                        builder.ToTable("Tags", "Content");
 
                         builder.HasKey(x => x.Id);
 

@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
+using trkienBlog.Application.Contents.Topics;
 using trkienBlog.Application.Contents.Topics.Contracts;
-using trkienBlog.Application.Contents.Topics.Repositories;
-using trkienBlog.Domain.Entities;
+using trkienBlog.Domain.Entities.Content;
 using trkienBlog.Domain.Exceptions;
 
 namespace trkienBlog.Infrastructure.Persistence.Repositories
@@ -27,6 +27,12 @@ namespace trkienBlog.Infrastructure.Persistence.Repositories
 
                         return await _db.Topics.AsNoTracking()
                                 .AnyAsync(x => x.Name == name.Trim(), cancellation);
+                }
+
+                public async Task<bool> ExistByIdAsync(Guid id, CancellationToken cancellation)
+                {
+                        return await _db.Topics.AsNoTracking()
+                                .AnyAsync(x => x.Id == id, cancellation);
                 }
 
                 public async Task<List<Topic>> ListAllAsync(CancellationToken cancellation)

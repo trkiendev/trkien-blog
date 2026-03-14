@@ -12,9 +12,10 @@
 }
 .defaultButton:hover { 
       transition-duration: 80ms; 
-      background-color: #465869; 
-      color: #25292e;
+      background-color: #eff2f5;
 }
+
+
 
 /* cancel button */
 .cancelButton { 
@@ -35,7 +36,6 @@
 
 /* save button */
 .saveButton { 
-      font-size: 12px; 
       background-color: var(--bright-blue); 
       cursor: pointer; 
       transition: all ease-in-out 0.2s; 

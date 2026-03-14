@@ -92,6 +92,12 @@ builder.Services.AddSingleton<IAmazonS3>(sp =>
         );
 });
 
+// MediatR
+builder.Services.AddMediatR(cfg =>
+{
+        cfg.RegisterServicesFromAssembly(typeof(ApplicationAssemblyMarker).Assembly);
+});
+
 // ===  Build app ===
 var app = builder.Build();
 

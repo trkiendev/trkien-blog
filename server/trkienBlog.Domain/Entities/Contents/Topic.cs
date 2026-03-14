@@ -1,8 +1,9 @@
-﻿using trkienBlog.Domain.Exceptions;
+﻿using trkienBlog.Domain.Common;
+using trkienBlog.Domain.Exceptions;
 
-namespace trkienBlog.Domain.Entities
+namespace trkienBlog.Domain.Entities.Content
 {
-        public sealed class Topic
+        public sealed class Topic : AggregateRoot<Guid>
         {
                 #region Constructor
                 private Topic() { }
@@ -20,7 +21,6 @@ namespace trkienBlog.Domain.Entities
                 #endregion
 
                 #region Properties
-                public Guid Id { get; private set; }
                 public string Name { get; private set; } = default!;
                 public string? ImageKey { get; private set; } 
                 public DateTime CreatedAt { get; private set; } = default!;

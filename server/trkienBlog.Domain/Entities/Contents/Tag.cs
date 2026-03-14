@@ -1,6 +1,8 @@
-﻿namespace trkienBlog.Domain.Entities
+﻿using trkienBlog.Domain.Common;
+
+namespace trkienBlog.Domain.Entities.Content
 {
-        public sealed class Tag
+        public sealed class Tag : AggregateRoot<Guid>
         {
                 #region Constructor
                 private Tag() { }
@@ -14,7 +16,6 @@
                 #endregion
 
                 #region Properties
-                public Guid Id { get; private set; }
                 public string Name { get; private set; } = default!;
                 public string Slug { get; private set; } = default!;
                 public bool IsActive { get; private set; } = true;

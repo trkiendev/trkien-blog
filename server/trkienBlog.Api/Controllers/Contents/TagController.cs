@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using trkienBlog.Application.Contents.Tags.Contracts;
 using trkienBlog.Application.Contents.Tags.Services;
 
-namespace trkienBlog.Api.Controllers
+namespace trkienBlog.Api.Controllers.Contents
 {
         [ApiController]
         [Route("api/tags")]

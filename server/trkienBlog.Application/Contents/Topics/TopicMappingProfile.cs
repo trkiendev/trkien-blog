@@ -1,8 +1,8 @@
-﻿using trkienBlog.Domain.Entities;
-using AutoMapper;
+﻿using AutoMapper;
 using trkienBlog.Application.Contents.Topics.Contracts;
+using trkienBlog.Domain.Entities.Content;
 
-namespace trkienBlog.Application.Contents.Topics.MappingProfiles
+namespace trkienBlog.Application.Contents.Topics
 {
         public sealed class TopicProfile : Profile
         {

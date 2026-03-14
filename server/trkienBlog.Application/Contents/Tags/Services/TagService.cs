@@ -1,6 +1,7 @@
 ﻿using trkienBlog.Application.Contents.Tags.Contracts;
 using trkienBlog.Application.Contents.Tags.Repositories;
 using trkienBlog.Domain.Entities;
+using trkienBlog.Domain.Entities.Content;
 
 namespace trkienBlog.Application.Contents.Tags.Services
 {

@@ -1,7 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using trkienBlog.Application.Auth.Services;
+using trkienBlog.Application.Contents.Posts;
 using trkienBlog.Application.Contents.Tags.Repositories;
-using trkienBlog.Application.Contents.Topics.Repositories;
+using trkienBlog.Application.Contents.Topics;
 using trkienBlog.Application.FileStorage.Services;
 using trkienBlog.Application.FileStorages.Services;
 using trkienBlog.Application.Security;
@@ -29,6 +30,7 @@ namespace trkienBlog.Infrastructure
                         services.AddScoped<IUserRepository, UserRepository>();
                         services.AddScoped<ITopicRepository, TopicRepository>();
                         services.AddScoped<ITagRepository, TagRepository>();
+                        services.AddScoped<IPostRepository, PostRepository>();  
 
                         return services;
                 }
