@@ -39,7 +39,7 @@
       color: var(--tooltip-fg-color, #424242);
 }
 .button:hover .tooltip {
-      top: -30px;
+      top: -35px;
       opacity: 1;
       visibility: visible;
       pointer-events: auto;

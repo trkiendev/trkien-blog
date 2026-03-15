@@ -18,18 +18,5 @@ namespace trkienBlog.Api.Controllers.Contents
                         _mediator = mediator;
                 }
 
-                [HttpGet("table")]
-                public async Task<IActionResult> GetTable(CancellationToken cancellation)
-                {
-                        var table = await _mediator.Send(new GetTablePostsQuery(), cancellation);
-                         return Ok(table);
-                }
-
-                [HttpPost]
-                public async Task<IActionResult> Create([FromForm] PostPayload payload, CancellationToken cancellation)
-                {
-                        var result = await _mediator.Send(new CreatePostCommand(payload), cancellation);
-                        return Ok(result);
-                }
         }
 }

@@ -10,7 +10,7 @@
       border-collapse: separate; /* thay cho collapse */
       border-spacing: 0;
       border-radius: 5px;
-      font-size: 13px;
+      font-size: 12px;
 }
 
 .table th, .table td {

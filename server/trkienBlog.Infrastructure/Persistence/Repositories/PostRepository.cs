@@ -24,6 +24,16 @@ namespace trkienBlog.Infrastructure.Persistence.Repositories
                                 .ProjectTo<PostTableDto>(_mapperConfig)
                                 .ToListAsync(cancellation);
                 }
+
+                public async Task<AdminPostDetailDto?> GetDetailByIdAsync(Guid id, CancellationToken cancellation)
+                {
+                        return await _db.Posts.AsNoTracking()
+                                .Where(x => x.Id == id)
+                                .Include(x => x.Tags)
+                                .ProjectTo<AdminPostDetailDto>(_mapperConfig)
+                                .FirstOrDefaultAsync(cancellation);
+                }
+
                 #endregion
 
                 #region Create

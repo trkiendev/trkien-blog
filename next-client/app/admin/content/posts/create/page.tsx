@@ -10,11 +10,11 @@ import { GetTopicLookup } from "@/domains/topic/topic.api";
 import SingleDropdown from "@/components/dropdown/SingleDropdown";
 import Image from "next/image";
 import buttonStyles from "../../../../styles/button.module.css";
-import { CreatePost } from "@/domains/posts/post.api";
 import { PostForm, PostPayload } from "@/domains/posts/post.model";
 import KitInput from "@/components/input/KitInput";
 import { useForm, useWatch } from "react-hook-form";
 import { slugify } from "@/shared/utils/slugify";
+import { AdminCreatePost } from "@/domains/posts/admin-post.api";
 
 export default function AdminContentCreatePostPage() {
       const {
@@ -68,7 +68,6 @@ export default function AdminContentCreatePostPage() {
       const onSubmit = async (data: PostForm) => {
             try {
                   const formData = new FormData();
-                  console.log("data: ", data);
 
                   formData.append("title", data.title);
                   formData.append("slug", data.slug);
@@ -83,7 +82,7 @@ export default function AdminContentCreatePostPage() {
                         formData.append("thumbnail", thumbnailFile);
                   }
 
-                  await CreatePost(formData);
+                  await AdminCreatePost(formData);
                   alert("success");
             } catch (error) {
                   alert(error instanceof Error ? error.message : 'Create post failed');

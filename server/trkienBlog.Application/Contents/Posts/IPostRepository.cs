@@ -6,6 +6,7 @@ namespace trkienBlog.Application.Contents.Posts
         public interface IPostRepository
         {
                 Task<IReadOnlyList<PostTableDto>> GetTableAsync(CancellationToken cancellation);
+                Task<AdminPostDetailDto?> GetDetailByIdAsync(Guid id, CancellationToken cancellation);
                 Task AddAsync(Post post, CancellationToken cancellation);
         }
 }

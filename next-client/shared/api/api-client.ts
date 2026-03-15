@@ -27,7 +27,7 @@ export async function apiFetch<T>(
 
             try {
                   const err = JSON.parse(text);
-                  console.log('err: ', err);
+                  console.error('err: ', err);
                   message = err.message ?? message;
             } catch {
                   if (text) message = text;

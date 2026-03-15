@@ -8,8 +8,11 @@ namespace trkienBlog.Application.Contents.Posts
         {
                 public PostMappingProfile() {
                         CreateMap<Post, PostDto>();
-
                         CreateMap<Post, PostTableDto>();
+                        CreateMap<Post, PostDetailDto>();
+
+                        CreateMap<Post, AdminPostDetailDto>()
+                                .ForMember(d => d.TagIds, o => o.MapFrom(s => s.Tags.Select(x => x.TagId)));  
                 }
         }
 }

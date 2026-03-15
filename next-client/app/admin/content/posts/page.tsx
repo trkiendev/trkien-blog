@@ -9,17 +9,20 @@ import cardStyles from "../../../styles/card.module.css";
 import tableStyles from "../../../styles/table.module.css";
 import { useEffect, useState } from "react";
 import { PostTableDto } from "@/domains/posts/post.dto";
-import { GetTablePosts } from "@/domains/posts/post.api";
 import { formatDate } from "@/shared/utils/datetime";
 import badgeStyles from "../../../styles/badge.module.css";
 import TooltipButton from "@/components/buttons/icon-button/TooltipButton";
+import { useRouter } from "next/navigation";
+import { AdminGetTablePosts } from "@/domains/posts/admin-post.api";
 
 export default function AdminContentPostsPage() {
+      const router = useRouter(); 
+
       const [posts,  setPosts] = useState<PostTableDto[]>([]);
 
       useEffect(() => {
             (async() => {
-                  const table = await GetTablePosts();
+                  const table = await AdminGetTablePosts();
                   setPosts(table);
             })();
       }, [])
@@ -102,7 +105,8 @@ export default function AdminContentPostsPage() {
                                                                         {/* Actions */}
                                                                         <td>
                                                                               <div className="flex gap-2 justify-center">
-                                                                                    <TooltipButton text="Preview" icon={ScanEye} bgColor="#1da1f2" fgColor="#fff" />
+                                                                                    <TooltipButton text="Preview" icon={ScanEye} bgColor="#1da1f2" fgColor="#fff"
+                                                                                    onClick={() => window.open(`/admin/content/posts/preview/${x.id}`, "_blank", "noopener,noreferrer")}/>
                                                                                     <TooltipButton text="Edit" icon={SquarePen} bgColor="#54BAB9" fgColor="#fff"/>
                                                                                     <TooltipButton text="Delete" icon={Trash2} bgColor="#EE4B2B" fgColor="#fff"/>
                                                                                     
