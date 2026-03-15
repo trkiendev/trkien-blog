@@ -17,5 +17,5 @@ export interface TopicDto {
 export interface TopicLookupDto {
       id: string;
       name: string;
-      imageKey?: string | null;
+      imageUrl?: string | null;
 }

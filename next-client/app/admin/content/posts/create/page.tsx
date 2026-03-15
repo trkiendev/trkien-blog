@@ -128,7 +128,7 @@ export default function AdminContentCreatePostPage() {
                                     dropdownLabel="Select a topic"
                                     getValue={(x) => x.id}
                                     getLabel={(x) => x.name}
-                                    getImageUrl={(x) => x.imageKey}
+                                    getImageUrl={(x) => x.imageUrl}
                                     value={selectedTopicId}
                                     placeholder="Select a topic"
                                     onChange={setSelectedTopicId}

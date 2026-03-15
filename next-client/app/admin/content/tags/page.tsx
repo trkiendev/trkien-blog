@@ -35,8 +35,6 @@ export default function AdminContentTagsPage() {
       useEffect(() => {
             (async() => {
                   const table = await GetTableTags();
-
-                  console.log('table: ', table);
                   setTags(table);
             })();
       }, []);

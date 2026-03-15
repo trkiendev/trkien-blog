@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
+using trkienBlog.Application.Contents.Tags;
 using trkienBlog.Application.Contents.Tags.Contracts;
-using trkienBlog.Application.Contents.Tags.Repositories;
 using trkienBlog.Domain.Entities.Content;
 
 namespace trkienBlog.Infrastructure.Persistence.Repositories

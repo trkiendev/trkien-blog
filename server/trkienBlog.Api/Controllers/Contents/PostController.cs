@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using trkienBlog.Application.Contents.Posts.Commands;
 using trkienBlog.Application.Contents.Posts.Contracts;
+using trkienBlog.Application.Contents.Posts.Queries;
 
 namespace trkienBlog.Api.Controllers.Contents
 {
@@ -15,6 +16,13 @@ namespace trkienBlog.Api.Controllers.Contents
                 public PostController(IMediator mediator)
                 {
                         _mediator = mediator;
+                }
+
+                [HttpGet("table")]
+                public async Task<IActionResult> GetTable(CancellationToken cancellation)
+                {
+                        var table = await _mediator.Send(new GetTablePostsQuery(), cancellation);
+                         return Ok(table);
                 }
 
                 [HttpPost]

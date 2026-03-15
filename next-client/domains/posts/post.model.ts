@@ -1,3 +1,5 @@
+export type PostStatus = "Draft" | "Published" | "Archived";
+
 export interface PostPayload {
       title: string;
       slug: string;

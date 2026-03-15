@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using trkienBlog.Application.Auth.Services;
 using trkienBlog.Application.Contents.Posts;
-using trkienBlog.Application.Contents.Tags.Repositories;
+using trkienBlog.Application.Contents.Tags;
 using trkienBlog.Application.Contents.Topics;
 using trkienBlog.Application.FileStorage.Services;
 using trkienBlog.Application.FileStorages.Services;

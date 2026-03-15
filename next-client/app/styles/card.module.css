@@ -1,9 +1,14 @@
+.primaryCard {
+      border-radius: 8px;
+      box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px;
+}
+
 .primaryCard .cardWrapper  {
-      border-radius: 5px;
       background-color: white;
       border: 1px solid #d1d9e0b3;
       width: 100%;
       height: fit-content;
+      border-radius: 8px;
 }    
 
 .primaryCard .cardHeader {
@@ -11,6 +16,9 @@
       font-weight: bold;
       padding: 8px;
       background-color: #fff;
+      text-align: center;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
 }      
 
 .primaryCard .cardBody {

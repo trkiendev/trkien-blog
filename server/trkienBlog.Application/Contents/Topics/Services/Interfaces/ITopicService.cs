@@ -8,6 +8,7 @@ namespace trkienBlog.Application.Contents.Topics.Services.Interfaces
                 Task<TopicDto?> GetByIdAsync(Guid id, CancellationToken cancellation);
                 Task<IReadOnlyList<TopicDto>> ListAllAsync(CancellationToken cancellation);
                 Task<IReadOnlyList<TopicLookupDto>> ListLookupAsync(CancellationToken cancellation);
+                Task<IDictionary<Guid, TopicLookupDto>> DictLookupAsync(IEnumerable<Guid> ids, CancellationToken cancellation);
                 Task<TopicDto> CreateAsync(string name, FileUploadDto? image, CancellationToken cancellation);
         }
 }

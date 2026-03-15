@@ -1,0 +1,20 @@
+.draft {
+      background: #f3f4f6;
+      color: #6b7280;
+}
+
+.published {
+      background: #dcfce7;
+      color: #15803d;
+}
+
+.archived {
+      background: #fee2e2;
+      color: #b91c1c;
+}
+
+.badge {
+      padding: 6px 8px;
+      border-radius: 6px;
+      box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+}

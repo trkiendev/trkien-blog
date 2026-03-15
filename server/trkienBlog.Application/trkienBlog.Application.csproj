@@ -12,7 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Contents\Posts\Services\" />
+    <Folder Include="Contents\Tags\MappingProfiles\" />
+    <Folder Include="Contents\Tags\Repositories\" />
   </ItemGroup>
 
   <PropertyGroup>

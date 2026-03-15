@@ -36,3 +36,7 @@
       background-color: var(--table-theme); 
 }
 
+.table .mutedRow {
+      text-align: center;
+      color: #aaa;
+}

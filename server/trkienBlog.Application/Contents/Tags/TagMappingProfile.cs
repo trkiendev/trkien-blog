@@ -2,7 +2,7 @@
 using trkienBlog.Application.Contents.Tags.Contracts;
 using trkienBlog.Domain.Entities.Content;
 
-namespace trkienBlog.Application.Contents.Tags.MappingProfiles
+namespace trkienBlog.Application.Contents.Tags
 {
         public sealed class TagMappingProfile : Profile
         {

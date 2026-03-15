@@ -35,6 +35,7 @@ namespace trkienBlog.Infrastructure.Persistence.Repositories
                                 .AnyAsync(x => x.Id == id, cancellation);
                 }
 
+                // Entity
                 public async Task<List<Topic>> ListAllAsync(CancellationToken cancellation)
                 {
                         return await _db.Topics.AsNoTracking()
@@ -42,6 +43,16 @@ namespace trkienBlog.Infrastructure.Persistence.Repositories
                                 .ToListAsync(cancellation);
                 }
 
+                // Properties
+                public async Task<Dictionary<Guid, string>> DictNameAsync(IEnumerable<Guid> ids, CancellationToken cancellation)
+                {
+                        ids = ids.Distinct();
+                        return await _db.Topics.AsNoTracking()
+                                .Where(x => ids.Contains(x.Id))
+                                .ToDictionaryAsync(x => x.Id, x => x.Name, cancellation);
+                }
+
+                // DTOs
                 public async Task<TopicDto?> GetByIdAsync(Guid id, CancellationToken cancellation)
                 {
                         return await _db.Topics
@@ -55,6 +66,16 @@ namespace trkienBlog.Infrastructure.Persistence.Repositories
                         return await _db.Topics.AsNoTracking()
                                 .ProjectTo<TopicLookupDto>(_mapperConfig)
                                 .ToListAsync(cancellation);
+                }
+
+                public async Task<IDictionary<Guid, TopicLookupDto>> DictLookupByIdsAsync(IEnumerable<Guid> ids, CancellationToken cancellation)
+                {
+                        ids = ids.Distinct().ToList();
+
+                        return await _db.Topics.AsNoTracking()
+                                .Where(x => ids.Contains(x.Id))
+                                .ProjectTo<TopicLookupDto>(_mapperConfig)
+                                .ToDictionaryAsync(x => x.Id, cancellation);
                 }
                 #endregion
 

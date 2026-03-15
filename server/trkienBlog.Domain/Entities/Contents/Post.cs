@@ -39,7 +39,6 @@ namespace trkienBlog.Domain.Entities.Content
                 public DateTime CreatedAt { get; private set; }
                 public DateTime? PublishedAt { get; private set; }
 
-
                 private readonly List<PostTag> _tags = new();
                 public IReadOnlyCollection<PostTag> Tags => _tags;
 

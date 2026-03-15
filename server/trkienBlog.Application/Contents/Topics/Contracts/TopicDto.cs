@@ -11,6 +11,7 @@
         {
                 public Guid Id { get; init; }
                 public string Name { get; init; } = default!;
-                public string? ImageKey { get; set; }  
+                public string? ImageKey { get; init; }  
+                public string? ImageUrl { get; set; }
         }
 }

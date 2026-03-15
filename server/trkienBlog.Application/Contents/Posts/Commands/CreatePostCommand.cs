@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using trkienBlog.Application.Contents.Posts.Contracts;
-using trkienBlog.Application.Contents.Tags.Repositories;
+using trkienBlog.Application.Contents.Tags;
 using trkienBlog.Application.Contents.Topics;
 using trkienBlog.Application.Exceptions;
 using trkienBlog.Application.FileStorage.Services;

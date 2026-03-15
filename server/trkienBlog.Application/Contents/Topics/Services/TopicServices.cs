@@ -59,8 +59,25 @@ namespace trkienBlog.Application.Contents.Topics.Services
                         {
                                 Id = x.Id,
                                 Name = x.Name,
-                                ImageKey = _urlBuilder.Build(x.ImageKey)
+                                ImageUrl = _urlBuilder.Build(x.ImageKey)
                         }).ToList();
+                }
+
+                public async Task<IDictionary<Guid, TopicLookupDto>> DictLookupAsync(IEnumerable<Guid> ids, CancellationToken cancellation)
+                {
+                        ids = ids.Distinct().ToList();
+
+                        var topics = await _topicRepo.DictLookupByIdsAsync(ids, cancellation); 
+                        foreach(var topic in topics.Values)
+                        {
+                                if(topic.ImageKey is not null)
+                                {
+                                        topic.ImageUrl = _urlBuilder.Build(topic.ImageKey);     
+                                }
+                        }
+
+                        return topics;
+                        
                 }
                 #endregion
 
