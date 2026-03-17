@@ -9,6 +9,7 @@ import Highlight from "@tiptap/extension-highlight";
 import {  Bold, Code, Highlighter, Italic, List, MessageSquareQuote, SquareChartGantt, SquareCode } from "lucide-react";
 import { CodeBlockTabIndent } from "./CodeBlockTabIndent";
 import { CalloutExtension } from "./Callout";
+import { useEffect } from "react";
 
 interface Props {
       value: any;
@@ -40,6 +41,12 @@ export default function RichEditor({ value, onChange }: Props) {
                   onChange(editor.getJSON()); // lưu JSONB
             },
       });
+
+      useEffect(() => {
+            if (editor && value) {
+                  editor.commands.setContent(value);
+            }
+      }, [editor, value]);
 
       if (!editor) return null;
 

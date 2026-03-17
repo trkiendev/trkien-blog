@@ -1,38 +1,35 @@
-"use client";
+"use client"
 
-import RichEditor from "@/components/editor/RichEditor";
-import { useEffect, useRef, useState } from "react"
-import { TagLookupDto } from "@/domains/tag/tag.model";
-import { ListLookupTags } from "@/domains/tag/tag.api";
-import MultipleDropdown from "@/components/dropdown/MultipleDropdown";
-import { TopicLookupDto } from "@/domains/topic/topic.model";
-import { GetTopicLookup } from "@/domains/topic/topic.api";
-import SingleDropdown from "@/components/dropdown/SingleDropdown";
+import { AdminPostDetailDto } from "@/domains/posts/admin-post.dto";
+import { useEditor } from "@tiptap/react";
+import { useParams } from "next/navigation"
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import buttonStyles from "../../../../styles/button.module.css";
-import { PostFormData } from "@/domains/posts/post.model";
+import { AdminGetPostDetail } from "@/domains/posts/admin-post.api";
 import KitInput from "@/components/input/KitInput";
-import { useForm, useWatch } from "react-hook-form";
-import { slugify } from "@/shared/utils/slugify";
-import { AdminCreatePost } from "@/domains/posts/admin-post.api";
+import { useForm } from "react-hook-form";
+import { PostFormData } from "@/domains/posts/post.model";
+import SingleDropdown from "@/components/dropdown/SingleDropdown";
+import { TopicLookupDto } from "@/domains/topic/topic.model";
+import { ListLookupTags } from "@/domains/tag/tag.api";
+import { GetTopicLookup } from "@/domains/topic/topic.api";
+import { TagLookupDto } from "@/domains/tag/tag.model";
+import MultipleDropdown from "@/components/dropdown/MultipleDropdown";
+import buttonStyles from "../../../../../styles/button.module.css";
+import RichEditor from "@/components/editor/RichEditor";
 
-export default function AdminContentCreatePostPage() {
+export default function AdminContentEditPostPage() {
+      const params = useParams();
+      const id = params.id as string;
+
       const {
             register, handleSubmit, control, setValue, reset, 
             formState: { errors, isSubmitting }
       } = useForm<PostFormData>({});
 
-      // Variables
-      const titleValue = useWatch({ control, name: "title"});
-
       const [autoSlug, setAutoSlug] = useState(true);
-      useEffect(() => {
-            if(!titleValue) return;
-            if(!autoSlug) return;
 
-            setValue("slug", slugify(titleValue));
-      }, [titleValue]);
-      
+      // content
       const [content, setContent] = useState<any>({
             type: "doc",
             content: [],
@@ -41,18 +38,29 @@ export default function AdminContentCreatePostPage() {
       // topics
       const [topicsLookups, setTopicLookups] = useState<TopicLookupDto[]>([]);
       const [selectedTopicId, setSelectedTopicId] = useState<string | undefined>();
+      useEffect(() => {
+            (async () => {
+                  const lookup = await GetTopicLookup();
+                  setTopicLookups(lookup);
+            })();
+      }, []);
 
       // tags
       const [tags, setTags] = useState<TagLookupDto[]>([]);
       const [tagLoading, setTagLoading] = useState(true);
       const [selectedTagIds, setSelectedTagIds] = useState<string[]>([]);
+      useEffect(() => {
+            (async () => {
+                  const tags = await ListLookupTags();
+                  setTags(tags);
+                  setTagLoading(false);
+            })();
+      }, []);
 
       // thumbnail
       const fileInputRef = useRef<HTMLInputElement>(null);
       const [thumbnailFile, setThumbnailFile] = useState<File | null>(null);
       const [thumbnailPreview, setThumbnailPreview] = useState("/thumbnails/default-thumbnail.jpg");
-
-      // file dialog
       const openFileDialog = () => { fileInputRef.current?.click(); };
       const handleThumbnailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
             const file = e.target.files?.[0];
@@ -63,50 +71,35 @@ export default function AdminContentCreatePostPage() {
             const preview = URL.createObjectURL(file);
             setThumbnailPreview(preview);
       };
-
-      // Save
-      const onSubmit = async (data: PostFormData) => {
-            try {
-                  const formData = new FormData();
-
-                  formData.append("title", data.title);
-                  formData.append("slug", data.slug);
-                  formData.append("contentJson", JSON.stringify(content));
-                  formData.append("topicId", selectedTopicId!);
-
-                  selectedTagIds.forEach((id, idx) => {
-                        formData.append(`tagIds[${idx}]`, id);
-                  });
-
-                  if (thumbnailFile) {
-                        formData.append("thumbnail", thumbnailFile);
+      
+      // post detail
+      const [ postDetail, setPostDetail ] = useState<AdminPostDetailDto>();
+      useEffect(() => {
+            (async() => {
+                  const detail = await AdminGetPostDetail(id);
+                  if(detail === null) {
+                        alert("Post not found");
+                        return;
                   }
 
-                  await AdminCreatePost(formData);
-                  alert("success");
-            } catch (error) {
-                  alert(error instanceof Error ? error.message : 'Create post failed');
-            }
-      };
+                  setPostDetail(detail);
+                  console.log("detail: ", detail);
 
-      // UseEffect
-      useEffect(() => {
-            (async () => {
-                  const data = await ListLookupTags();
-                  setTags(data);
-                  setTagLoading(false);
+                  setSelectedTopicId(detail.topicId);
+                  setSelectedTagIds(detail.tagIds);
+                  setContent(JSON.parse(detail.contentJson));
+                  if(detail.thumbnailUrl) {
+                        setThumbnailPreview(detail.thumbnailUrl);
+                  }
+                  reset({
+                        title: detail.title,
+                        slug: detail.slug
+                  });
             })();
-      }, []);
-
-      useEffect(() => {
-            (async () => {
-                  const lookup = await GetTopicLookup();
-                  setTopicLookups(lookup);
-            })();
-      }, []);
+      }, [id, reset]);
 
       return (
-            <form className="flex gap-4" onSubmit={handleSubmit(onSubmit)}>
+            <form className="flex gap-4">
                   {/* Metadata */}
                   <div className="w-fit bg-[#fff] rounded-sm p-2 shadow-md">
                         <div className="text-center font-bold">Metadata</div>
@@ -123,7 +116,7 @@ export default function AdminContentCreatePostPage() {
                                     )}
                               </div>
 
-                              {/* Select topic */}
+                              {/* Select Topic */}
                               <SingleDropdown items={topicsLookups}
                                     dropdownLabel="Select a topic"
                                     getValue={(x) => x.id}
@@ -144,7 +137,7 @@ export default function AdminContentCreatePostPage() {
                                     onChange={setSelectedTagIds}
                               ></MultipleDropdown>
 
-                              {/* thumbnail */}
+                              {/* Thumbnail */}
                               <div className="flex flex-col">
                                     <label className="label">Thumbnail</label>
                                     <div className="relative w-[300px] h-[180px] rounded-lg overflow-hidden cursor-pointer group" onClick={openFileDialog}>

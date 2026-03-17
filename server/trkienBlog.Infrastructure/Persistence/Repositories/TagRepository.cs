@@ -47,6 +47,14 @@ namespace trkienBlog.Infrastructure.Persistence.Repositories
                                 .ProjectTo<TagLookupDto>(_mapperConfig)
                                 .ToListAsync(cancellation);
                 }
+
+                public async Task<IReadOnlyList<TagLookupDto>> ListLookupByIdsAsync(IEnumerable<Guid> ids, CancellationToken cancellation)
+                {
+                        return await _db.Tags.AsNoTracking()
+                                .Where(x => ids.Contains(x.Id))
+                                .ProjectTo<TagLookupDto>(_mapperConfig)
+                                .ToListAsync(cancellation);
+                }
                 #endregion 
 
                 public async Task AddAsync(Tag tag, CancellationToken cancellation)

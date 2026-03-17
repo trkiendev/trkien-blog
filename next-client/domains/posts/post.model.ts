@@ -9,7 +9,7 @@ export interface PostPayload {
       thumbnail?: File;
 }
 
-export interface PostForm{
+export interface PostFormData{
       title: string;
       slug: string;
       contentJson: string;

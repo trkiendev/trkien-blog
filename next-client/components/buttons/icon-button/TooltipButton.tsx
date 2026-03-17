@@ -10,7 +10,6 @@ type TooltipButtonProps = {
       onClick?: () => void;
 }
 
-
 export default function TooltipButton({
       text,
       icon: Icon,
