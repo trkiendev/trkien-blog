@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using trkienBlog.Application.Contents.Posts;
 using trkienBlog.Application.Contents.Posts.Contracts;
 using trkienBlog.Application.Contents.Topics.Services.Interfaces;
 using trkienBlog.Application.FileStorages.Services;

@@ -32,14 +32,20 @@ namespace trkienBlog.Api.Controllers.Admin.Contents
                         var detail = await _mediator.Send(new GetAdminPostDetailQuery(id), cancellation);
                         return Ok(detail);
                 }
-
-
                 #endregion
+
                 [HttpPost]
                 public async Task<IActionResult> Create([FromForm] PostPayload payload, CancellationToken cancellation)
                 {
                         var result = await _mediator.Send(new CreatePostCommand(payload), cancellation);
                         return Ok(result);
+                }
+
+                [HttpPut("{id:guid}")]
+                public async Task<IActionResult> Update([FromRoute] Guid id, [FromForm] PostPayload payload, CancellationToken cancellation)
+                {
+                        var result = await _mediator.Send(new UpdatePostCommand(id, payload), cancellation);
+                        return Ok(result);      
                 }
         }
 }

@@ -45,10 +45,14 @@ namespace trkienBlog.Domain.Entities.Content
                 #endregion
 
                 #region Domain Behaviors
-                public void UpdateContent(string title, string contentJson)
+                public void UpdateContent(string title, string slug, string contentJson, Guid topicId, IEnumerable<Guid> tagIds, string? thumbnailKey)
                 {
                         Title = title;
+                        Slug = slug;
                         ContentJson = contentJson;
+                        TopicId = topicId;      
+                        ThumbnailKey = thumbnailKey;
+                        SetTags(tagIds);
                 }
 
                 public void SetTags(IEnumerable<Guid> tagIds)

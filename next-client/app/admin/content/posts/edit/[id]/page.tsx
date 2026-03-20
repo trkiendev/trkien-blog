@@ -1,11 +1,10 @@
 "use client"
 
 import { AdminPostDetailDto } from "@/domains/posts/admin-post.dto";
-import { useEditor } from "@tiptap/react";
 import { useParams } from "next/navigation"
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { AdminGetPostDetail } from "@/domains/posts/admin-post.api";
+import { AdminGetPostDetail, AdminUpdatePost } from "@/domains/posts/admin-post.api";
 import KitInput from "@/components/input/KitInput";
 import { useForm } from "react-hook-form";
 import { PostFormData } from "@/domains/posts/post.model";
@@ -23,7 +22,7 @@ export default function AdminContentEditPostPage() {
       const id = params.id as string;
 
       const {
-            register, handleSubmit, control, setValue, reset, 
+            register, handleSubmit, control, setValue, reset,
             formState: { errors, isSubmitting }
       } = useForm<PostFormData>({});
 
@@ -71,13 +70,13 @@ export default function AdminContentEditPostPage() {
             const preview = URL.createObjectURL(file);
             setThumbnailPreview(preview);
       };
-      
+
       // post detail
-      const [ postDetail, setPostDetail ] = useState<AdminPostDetailDto>();
+      const [postDetail, setPostDetail] = useState<AdminPostDetailDto>();
       useEffect(() => {
-            (async() => {
+            (async () => {
                   const detail = await AdminGetPostDetail(id);
-                  if(detail === null) {
+                  if (detail === null) {
                         alert("Post not found");
                         return;
                   }
@@ -88,7 +87,7 @@ export default function AdminContentEditPostPage() {
                   setSelectedTopicId(detail.topicId);
                   setSelectedTagIds(detail.tagIds);
                   setContent(JSON.parse(detail.contentJson));
-                  if(detail.thumbnailUrl) {
+                  if (detail.thumbnailUrl) {
                         setThumbnailPreview(detail.thumbnailUrl);
                   }
                   reset({
@@ -98,9 +97,34 @@ export default function AdminContentEditPostPage() {
             })();
       }, [id, reset]);
 
+      const onSubmit = async (data: PostFormData) => {
+            try {
+                  const formData = new FormData();
+                  formData.append("title", data.title);
+                  formData.append("slug", data.slug);
+                  formData.append("contentJson", JSON.stringify(content));
+                  formData.append("topicId", selectedTopicId!);
+
+                  selectedTagIds.forEach((id, idx) => {
+                        formData.append(`tagIds[${idx}]`, id);
+                  });
+
+                  if (thumbnailFile) {
+                        formData.append("thumbnail", thumbnailFile);
+                  }
+
+                  await AdminUpdatePost(id, formData);
+
+                  alert("success");
+
+            } catch (error) {
+                  alert(error instanceof Error ? error.message : 'Failed to save changes');
+            }
+      }
+
       return (
-            <form className="flex gap-4">
-                  {/* Metadata */}
+            <form className="flex gap-4" onSubmit={handleSubmit(onSubmit)}>
+                  {/* Metadata */} 
                   <div className="w-fit bg-[#fff] rounded-sm p-2 shadow-md">
                         <div className="text-center font-bold">Metadata</div>
                         <div className="flex flex-col gap-4">
@@ -158,21 +182,21 @@ export default function AdminContentEditPostPage() {
                               <div className="w-full">
                                     <input type="text" placeholder="Untitled post"
                                           className="text-4xl font-bold w-full outline-none"
-                                          {...register("title", { required: "Title is required"})} 
+                                          {...register("title", { required: "Title is required" })}
                                     />
                                     {errors.title && (
                                           <p className="text-red-500 text-xs mt-1">
-                                          {errors.title.message}
+                                                {errors.title.message}
                                           </p>
                                     )}
                               </div>
 
                               {/* Actions */}
                               <div className="flex gap-2">
-                                    <button className={buttonStyles.cancelButton}>Hủy</button>
+                                    <button className={buttonStyles.cancelButton}>Cancel</button>
                                     <button type="submit" className={buttonStyles.saveButton} disabled={isSubmitting}>
-                                                {isSubmitting ? 'Submitting ...' : 'Submit'}
-                                          </button>
+                                          {isSubmitting ? 'Saving ...' : 'Save'}
+                                    </button>
                               </div>
                         </div>
 

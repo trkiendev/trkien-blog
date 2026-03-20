@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using trkienBlog.Application.Abstractions;
 using trkienBlog.Application.Contents.Posts.Contracts;
 using trkienBlog.Application.Contents.Tags;
 using trkienBlog.Application.Contents.Topics;
@@ -16,16 +17,19 @@ namespace trkienBlog.Application.Contents.Posts.Commands
                 private readonly ITagRepository _tagRepo;
                 private readonly ITopicRepository _topicRepo;
                 private readonly IFileStorageService _storage;
+                private readonly IUnitOfWork _uow;
                 public CreatePostCommandHandler(
-                        IPostRepository postRepo, 
-                        ITagRepository tagRepo, 
+                        IPostRepository postRepo,
+                        ITagRepository tagRepo,
                         ITopicRepository topicRepo,
-                        IFileStorageService storage
+                        IFileStorageService storage,
+                        IUnitOfWork uow
                 ) {
                         _postRepo = postRepo;
                         _tagRepo = tagRepo;
                         _topicRepo = topicRepo;
                         _storage = storage;
+                        _uow = uow;
                 }       
 
                 public async Task<Unit> Handle(CreatePostCommand command, CancellationToken cancellation)
@@ -68,7 +72,8 @@ namespace trkienBlog.Application.Contents.Posts.Commands
                                 thumbnailKey: thumbnailKey
                         );
 
-                        await _postRepo.AddAsync(entity, cancellation);
+                        await _postRepo.Add(entity);
+                        await _uow.SaveChangesAsync(cancellation);
 
                         return Unit.Value;
                 }

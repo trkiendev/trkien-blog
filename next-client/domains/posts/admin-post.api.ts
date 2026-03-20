@@ -23,3 +23,11 @@ export async function AdminCreatePost(formData: FormData): Promise<void> {
             body: formData
       })
 }
+
+// PUT
+export async function AdminUpdatePost(id: string, FormData: FormData): Promise<void> {
+      return apiFetch(`/admin/posts/${id}`, {
+            method: 'PUT',
+            body: FormData
+      })
+}

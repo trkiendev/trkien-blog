@@ -1,9 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using trkienBlog.Application.Contents.Posts.Commands;
-using trkienBlog.Application.Contents.Posts.Contracts;
-using trkienBlog.Application.Contents.Posts.Queries;
 
 namespace trkienBlog.Api.Controllers.Contents
 {
@@ -17,6 +14,7 @@ namespace trkienBlog.Api.Controllers.Contents
                 {
                         _mediator = mediator;
                 }
+
 
         }
 }

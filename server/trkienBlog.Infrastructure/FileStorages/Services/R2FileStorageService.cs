@@ -39,5 +39,26 @@ namespace trkienBlog.Infrastructure.FileStorage.Services
                         await _s3.PutObjectAsync(request);
                         return key;
                 }
+
+                public async Task DeleteAsync(string key)
+                {
+                        if (string.IsNullOrWhiteSpace(key))
+                                return;
+
+                        try
+                        {
+                                var request = new DeleteObjectRequest
+                                {
+                                        BucketName = _options.BucketName,
+                                        Key = key
+                                };
+
+                                await _s3.DeleteObjectAsync(request);
+                        } catch(AmazonS3Exception ex)
+                        {
+                                // Log
+                                Console.WriteLine($"[R2] Delete fail: {ex.Message}");
+                        }
+                }
         }
 }

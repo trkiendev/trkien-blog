@@ -18,6 +18,5 @@ namespace trkienBlog.Infrastructure.FileStorages.Services
                         var url = $"{_options.PublicBaseUrl}/{imageKey}";
                         return url;
                 }
-
         }
 }

@@ -17,7 +17,22 @@ namespace trkienBlog.Infrastructure.Persistence.Repositories
                         _mapperConfig = mapperConfig;   
                 }
 
+                #region Validations 
+                public async Task<bool> ExistByIdAsync(Guid id, CancellationToken cancellation)
+                {
+                        return await _db.Posts.AsNoTracking()
+                                .AnyAsync(x => x.Id == id, cancellation);
+                }
+                #endregion
+
                 #region GET
+                // Entities
+                public async Task<Post?> GetByIdAsync(Guid id, CancellationToken cancellation)
+                {
+                        return await _db.Posts.FirstOrDefaultAsync(x => x.Id == id, cancellation);
+                }
+
+                // DTOs
                 public async Task<IReadOnlyList<PostTableDto>> GetTableAsync(CancellationToken cancellation)
                 {
                         return await _db.Posts.AsNoTracking()
@@ -37,10 +52,18 @@ namespace trkienBlog.Infrastructure.Persistence.Repositories
                 #endregion
 
                 #region Create
-                public async Task AddAsync(Post post, CancellationToken cancellation)
+                public Task Add(Post post)
                 {
-                        _db.Posts.Add(post);    
-                        await _db.SaveChangesAsync(cancellation);   
+                        _db.Posts.Add(post);
+                        return Task.CompletedTask;
+                }
+                #endregion
+
+                #region Update
+                public Task Update(Post post)
+                {
+                        _db.Posts.Update(post);
+                        return Task.CompletedTask;
                 }
                 #endregion
         }

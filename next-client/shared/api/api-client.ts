@@ -24,6 +24,7 @@ export async function apiFetch<T>(
       if (!res.ok) {
             const text = await res.text();
             let message = 'Request failed';
+            console.log("text: ", text);
 
             try {
                   const err = JSON.parse(text);
