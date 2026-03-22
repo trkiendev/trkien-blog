@@ -87,7 +87,7 @@ export default function AdminContentEditPostPage() {
                   setSelectedTopicId(detail.topicId);
                   setSelectedTagIds(detail.tagIds);
                   setContent(JSON.parse(detail.contentJson));
-                  if (detail.thumbnailUrl) {
+                  if(detail.thumbnailUrl) {
                         setThumbnailPreview(detail.thumbnailUrl);
                   }
                   reset({

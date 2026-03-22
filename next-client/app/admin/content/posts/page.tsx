@@ -106,8 +106,11 @@ export default function AdminContentPostsPage() {
                                                                         <td>
                                                                               <div className="flex gap-2 justify-center">
                                                                                     <TooltipButton text="Preview" icon={ScanEye} bgColor="#1da1f2" fgColor="#fff"
-                                                                                    onClick={() => window.open(`/admin/content/posts/preview/${x.id}`, "_blank", "noopener,noreferrer")}/>
-                                                                                    <TooltipButton text="Edit" icon={SquarePen} bgColor="#54BAB9" fgColor="#fff"/>
+                                                                                          onClick={() => window.open(`/admin/content/posts/preview/${x.id}`, "_blank", "noopener,noreferrer")}
+                                                                                    />
+                                                                                    <TooltipButton text="Edit" icon={SquarePen} bgColor="#54BAB9" fgColor="#fff"
+                                                                                          onClick={() => window.open(`/admin/content/posts/edit/${x.id}`, "_blank", "noopener,noreferrer")}
+                                                                                    />
                                                                                     <TooltipButton text="Delete" icon={Trash2} bgColor="#EE4B2B" fgColor="#fff"/>
                                                                                     
                                                                               </div>

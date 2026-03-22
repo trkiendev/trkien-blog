@@ -48,19 +48,17 @@ namespace trkienBlog.Application.Contents.Posts.Commands
 
                         #region Thumbnail
                         string? newThumbnailKey = post.ThumbnailKey;
-                        // Remove thumbnail
-                        if(post.ThumbnailKey is not null)
-                        {
-                                await _fileStorage.DeleteAsync(post.ThumbnailKey);
-                                newThumbnailKey = null;
-                        }
-
-                        // replace thumbnail
                         if(payload.Thumbnail is not null)
                         {
+                                if(post.ThumbnailKey is not null)
+                                {
+                                        await _fileStorage.DeleteAsync(post.ThumbnailKey);
+                                        newThumbnailKey = null;
+                                }
+
                                 using var stream = payload.Thumbnail.OpenReadStream();
                                 var uploadKey = await _fileStorage.UploadAsync(stream, payload.Thumbnail.FileName, payload.Thumbnail.ContentType);
-                                if(post.ThumbnailKey is not null)
+                                if (post.ThumbnailKey is not null)
                                 {
                                         await _fileStorage.DeleteAsync(post.ThumbnailKey);
                                 }

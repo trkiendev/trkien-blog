@@ -57,11 +57,17 @@ namespace trkienBlog.Domain.Entities.Content
 
                 public void SetTags(IEnumerable<Guid> tagIds)
                 {
-                        _tags.Clear();
+                        var newTagIds = tagIds.Distinct().ToList();
 
-                        foreach (var tagId in tagIds.Distinct())
+                        _tags.RemoveAll(x => !newTagIds.Contains(x.TagId));
+
+                        var existingTagIds = _tags.Select(x => x.TagId).ToHashSet();
+                        foreach (var tagId in existingTagIds)
                         {
-                                _tags.Add(new PostTag(Id, tagId));
+                                if(!existingTagIds.Contains(tagId))
+                                {
+                                        _tags.Add(new PostTag(Id, tagId));
+                                }
                         }
                 }
 

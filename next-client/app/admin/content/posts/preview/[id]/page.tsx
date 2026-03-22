@@ -5,7 +5,7 @@ import { AdminPostDetailDto } from "@/domains/posts/admin-post.dto";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Image from "next/image";
-import { EditorContent, useEditor } from "@tiptap/react";
+import { useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import PostRenderer from "@/components/posts/post-renderer/PostRenderer";
 import cardStyles from "../../../../../styles/card.module.css";
@@ -32,6 +32,7 @@ export default function AdminContentPostPreviewPage() {
       useEffect(() => {
             (async() => {
                   const detail = await AdminGetPostDetail(id);
+                  console.log("detail: ", detail);
                   if(detail === null) {
                         alert("Post not found");
                         return;
